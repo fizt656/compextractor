@@ -12,12 +12,16 @@ from pydub import AudioSegment
 from config import *
 from colorama import init, Fore, Back, Style
 from playsound import playsound
+from pygame import mixer
+from cleanup import cleanup_temp_files
+import threading
 
 # Initialize colorama
 init(autoreset=True)
 
 def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
     print(f"{style}{color}{text}")
+    playsound('coin.mp3')
 
 def display_intro():
     intro = f"""{Fore.CYAN}{Style.BRIGHT}
@@ -29,6 +33,14 @@ def display_intro():
    
 {Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}    """
     print(intro)
+
+def play_background_music():
+    mixer.init()
+    mixer.music.load('aquatic_ambience.mp3')
+    mixer.music.play(-1)  # -1 means loop indefinitely
+
+def stop_background_music():
+    mixer.music.stop()
 
 def convert_to_wav(input_file):
     if input_file.lower().endswith('.wav'):
@@ -49,11 +61,16 @@ def split_audio(file_path, max_size_mb=24):
     duration_ms = len(audio)
     chunk_duration_ms = int((max_size_bytes / len(audio.raw_data)) * duration_ms)
     
+    # Create temp directory if it doesn't exist
+    temp_dir = "temp"
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)
+    
     chunks = []
     for i, chunk_start in enumerate(range(0, duration_ms, chunk_duration_ms)):
         chunk_end = min(chunk_start + chunk_duration_ms, duration_ms)
         chunk = audio[chunk_start:chunk_end]
-        chunk_file = f"{os.path.splitext(file_path)[0]}_chunk_{i}.wav"
+        chunk_file = os.path.join(temp_dir, f"chunk_{i}.wav")
         chunk.export(chunk_file, format="wav")
         chunks.append(chunk_file)
         
@@ -368,9 +385,13 @@ def generate_combined_report(narrative_reports, competency_data):
 def main():
     display_intro()
     
+    # Start playing background music
+    background_music_thread = threading.Thread(target=play_background_music)
+    background_music_thread.start()
+
+    
     audio_file = input(f"{Fore.YELLOW}Enter the name of the audio file: {Style.RESET_ALL}")
     competency_file = input(f"{Fore.YELLOW}Enter the name of the competencies file: {Style.RESET_ALL}")
-    sound_file = input(f"{Fore.YELLOW}Enter the name of the sound file to play when done: {Style.RESET_ALL}")
 
     if not os.path.exists(audio_file):
         print_colored(f"Error: The audio file {audio_file} does not exist.", Fore.RED)
@@ -378,8 +399,14 @@ def main():
     if not os.path.exists(competency_file):
         print_colored(f"Error: The competency definition file {competency_file} does not exist.", Fore.RED)
         return
-    if not os.path.exists(sound_file):
-        print_colored(f"Error: The sound file {sound_file} does not exist.", Fore.RED)
+    if not os.path.exists('sound.mp3'):
+        print_colored(f"Error: The sound file sound.mp3 does not exist.", Fore.RED)
+        return
+    if not os.path.exists('coin.mp3'):
+        print_colored(f"Error: The sound file coin.mp3 does not exist.", Fore.RED)
+        return
+    if not os.path.exists('aquatic_ambience.mp3'):
+        print_colored(f"Error: The sound file aquatic_ambience.mp3 does not exist.", Fore.RED)
         return
 
     wav_file = convert_to_wav(audio_file)
@@ -390,13 +417,16 @@ def main():
     print_colored("Transcribing audio and performing diarization...", Fore.CYAN)
     print_colored(f"{'[PROCESSING]':=^40}", Fore.CYAN)
     
+    
     speaker_transcripts = transcribe_and_diarize(wav_file, True)
     if speaker_transcripts is None:
+        stop_background_music()
         return
 
     print_colored("Reading competency definitions...", Fore.CYAN)
     competency_definitions = read_competency_definitions(competency_file)
     if competency_definitions is None:
+        stop_background_music()
         return
 
     narrative_reports = {}
@@ -419,13 +449,17 @@ def main():
 
         print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
         
-        try:
-            playsound(sound_file)
-            print_colored("Played completion sound", Fore.GREEN)
-        except Exception as e:
-            print_colored(f"Error playing sound: {e}", Fore.RED)
+        # Stop background music and play completion sound
+        stop_background_music()
+        playsound('sound.mp3')
+        print_colored("Played completion sound", Fore.GREEN)
+
+        # Clean up temporary files
+        cleanup_temp_files()
+        print_colored("Temporary files cleaned up", Fore.GREEN)
     except Exception as e:
         print_colored(f"Error writing output: {e}", Fore.RED)
+        stop_background_music()
 
 if __name__ == "__main__":
     main()

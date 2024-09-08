@@ -11,3 +11,4 @@ colorama==0.4.6
 playsound==1.2.2
 matplotlib==3.7.1
 plotly==5.14.1
+pygame==2.5.2
