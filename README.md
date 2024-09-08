@@ -2,7 +2,7 @@
 
 # Competency Extractor
 
-This is a prototype tool for extracting student competency insights from audio recordings of student presentations or discussions. It now supports multi-speaker analysis through diarization and includes a new data output mode with radar graph visualizations.
+This is a prototype tool for extracting student competency insights from audio recordings of student presentations or discussions. It now supports multi-speaker analysis through diarization and includes a new data output mode with radar graph visualizations, as well as a combined mode that provides both narrative and visual outputs.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ This is a prototype tool for extracting student competency insights from audio r
 
 1. Prepare your audio file (supported formats include MP3, MP4, WAV) and competencies file (a text file with competency definitions).
 
-2. Run the script:
+2. Run the script in one of the following modes:
    - For narrative output:
      ```bash
      python src/main.py [--diarize]
@@ -78,7 +78,11 @@ This is a prototype tool for extracting student competency insights from audio r
      ```bash
      python src/main_data.py [--diarize] [--visualize]
      ```
-   Use the `--diarize` flag for multi-speaker analysis and the `--visualize` flag to generate radar charts.
+   - For combined narrative and data output:
+     ```bash
+     python src/main_combined.py
+     ```
+   Use the `--diarize` flag for multi-speaker analysis and the `--visualize` flag to generate radar charts (where applicable).
 
 3. When prompted, enter the names of your audio file, competencies file, and sound file to play when done.
 
@@ -91,12 +95,13 @@ This is a prototype tool for extracting student competency insights from audio r
 7. The script will process the audio and generate output based on the mode:
    - Narrative mode: Generates a `report.html` file with the transcript and competency insights.
    - Data mode: Generates a `competency_data.json` file with structured data and, if visualize is enabled, radar chart HTML files for each speaker.
+   - Combined mode: Generates a `combined_report.html` file with both narrative insights and radar charts for each speaker.
 
-8. Open the generated HTML files in a web browser to view the formatted report or radar charts.
+8. Open the generated HTML files in a web browser to view the formatted report, radar charts, or combined output.
 
-## New Feature: Data Output Mode with Radar Graphs
+## Combined Narrative and Data Output
 
-The Competency Extractor now includes a new data output mode that provides structured competency data and visualizations:
+In addition to providing separate outputs if needed, the Competency Extractor now includes a combined output mode that provides both narrative insights and data visualizations in a single report:
 
 1. **Structured Data Output**: The script generates a `competency_data.json` file containing detailed competency assessments for each speaker, including:
    - Competency ratings (0-10 scale)
@@ -109,19 +114,25 @@ The Competency Extractor now includes a new data output mode that provides struc
    - Charts are labeled with the corresponding speaker tag (e.g., SPEAKER_00, SPEAKER_01).
    - The radar charts provide an intuitive visual representation of competency strengths and areas for development.
 
-3. **Multi-Speaker Support**: The data mode fully supports multi-speaker analysis:
-   - When used with the `--diarize` flag, it processes each speaker's transcript separately.
-   - Generates individual competency data and radar charts for each identified speaker.
-   - Allows for easy comparison of competencies across different speakers in the same recording.
+3. **Integrated Analysis**: The script generates a `combined_report.html` file containing:
+   - Narrative competency insights for each speaker
+   - Radar chart visualizations of competency ratings
+   - Overall assessment of competencies 
 
-To use the new data output mode:
+4. **Multi-Speaker Support**: The combined mode fully supports multi-speaker analysis:
+   - Automatically performs diarization to identify different speakers
+   - Generates separate narrative insights and radar charts for each identified speaker
+   - Allows for easy comparison of competencies across different speakers in the same recording
+
+5. **Consistent Speaker Labeling**: Ensures that speaker labels are consistent between the narrative and visual parts of the report
+
+To use the new combined output mode:
 ```bash
-python src/main_data.py --diarize --visualize
+python src/main_combined.py
 ```
 
 This will generate:
-- `competency_data.json`: Structured competency data for all speakers
-- `competency_radar_chart_SPEAKER_XX.html`: Interactive radar charts for each speaker
+- `combined_report.html`: A single HTML file containing narrative insights and radar charts for all speakers
 
 ## Example Files
 
@@ -137,7 +148,7 @@ This repository includes example files for testing:
 To run the script with these example files:
 
 1. Make sure you're in the project directory and your virtual environment is activated.
-2. Run the script in narrative mode:
+2. Run the script in your desired mode:
    ```bash
    python src/main.py [--diarize]
    ```
@@ -145,9 +156,13 @@ To run the script with these example files:
    ```bash
    python src/main_data.py [--diarize] [--visualize]
    ```
+   Or in combined mode:
+   ```bash
+   python src/main_combined.py
+   ```
 3. When prompted, enter:
-   - For the audio file: `test.mp3`, `longer_test.mp3`, or `multi-speaker-discussion.mp3`
-   - For the competencies file: `test.txt`
+   - For the audio file: `test.mp3`, `longer_test.mp3`, or `multi-speaker-discussion.mp3` (or any other sound file you prefer)
+   - For the competencies file: `test.txt` (or any other text file with competencies and their definitions) 
    - For the sound file: `sound.mp3` (or any other sound file you prefer)
 
 This will process the example audio file using the example competencies and generate the appropriate output files.
@@ -158,16 +173,16 @@ The script automatically handles large audio files by splitting them into smalle
 
 ## Multi-Speaker Support and Diarization
 
-The Competency Extractor supports multi-speaker analysis through diarization. When you run the script with the `--diarize` flag, it will:
+The Competency Extractor supports multi-speaker analysis through diarization. When you run the script with diarization enabled (default for main_combined.py), it will:
 
 1. Identify different speakers in the audio recording.
 2. Transcribe the audio with speaker labels.
 3. Analyze competencies for each identified speaker separately.
-4. Generate output (narrative or data) that includes speaker-specific insights and an overall analysis.
+4. Generate output that includes speaker-specific insights and an overall analysis.
 
 ## Notes and Recommendations
 
-- Change the system prompt in main.py or main_data.py to suit different needs.  
+- Change the system prompt in main.py, main_data.py, or main_combined.py to suit different needs.  
 
 - Try different ways of querying the competencies text file with respect to the transcript.
 
@@ -194,5 +209,6 @@ Let's break it, and then make it better!
 - Optimize the handling of large audio files for better performance.
 - Enhance visualization options for competency data.
 - Implement comparative analysis features for multi-speaker recordings.
+- Explore ways to customize the combined report format and layout.
 
 Other ideas? Feel free to contribute or suggest improvements!
