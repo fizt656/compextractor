@@ -20,3 +20,9 @@ Thumbs.db
 
 # Output files
 report.txt
+report.html
+competency_data.json
+competency_radar_chart*.html
+
+# Temporary audio chunks
+*_chunk_*.wav

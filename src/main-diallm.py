@@ -105,7 +105,7 @@ def extract_competency_insights(transcript, competency_definitions):
 
         Please provide a structured HTML report of competency development, including:
         1. An Overview section listing ALL of the competencies and describing the report briefly.
-        2. A section for competency insights, with subsections for each competency
+        2. A section for competency insights, with subsections for each competency arranged in two columns with 6 rows per column
         3. Evidence of competency development for each defined competency
         4. Areas for improvement or further development
         5. Specific examples from the transcript that demonstrate competency-related behaviors or knowledge
@@ -120,7 +120,27 @@ def extract_competency_insights(transcript, competency_definitions):
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Competency Insights Report</title>
             <style>
-                /* Include your CSS styles here */
+                body {{
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }}
+                h1, h2 {{
+                    color: #2c3e50;
+                }}
+                .competency-grid {{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 20px;
+                }}
+                .competency-item {{
+                    border: 1px solid #ddd;
+                    padding: 15px;
+                    border-radius: 5px;
+                }}
             </style>
         </head>
         <body>
@@ -133,14 +153,16 @@ def extract_competency_insights(transcript, competency_definitions):
             
             <section id="competency-insights">
                 <h2>Competency Insights</h2>
-                <!-- Include competency analysis here -->
+                <div class="competency-grid">
+                    <!-- Include competency analysis here, with each competency in a div with class "competency-item" -->
+                </div>
             </section>
         </body>
         </html>
 
-        There are multiple speakers in this conversation.  pick them apart based on how they talk and label the speakers accordingly (if they don't give their name, give them a descriptive name).
+        There are multiple speakers in this conversation. Pick them apart based on how they talk and label the speakers accordingly (if they don't give their name, give them a descriptive name).
         
-        Ensure that your response is a complete, valid HTML document.
+        Ensure that your response is a complete, valid HTML document with the competencies arranged in two columns, 6 rows per column.
         """
         
         data = {
