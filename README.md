@@ -1,5 +1,7 @@
 ![Competency Extractor](banner.jpg)
 
+**Update**: OK... so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
+
 # Competency Extractor
 
 This prototype tool extracts student competency insights from audio recordings of presentations or discussions. It now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations.
