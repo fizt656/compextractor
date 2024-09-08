@@ -7,16 +7,24 @@ import argparse
 import subprocess
 from pydub import AudioSegment
 from config import *
+from colorama import init, Fore, Back, Style
+from playsound import playsound
+
+# Initialize colorama
+init(autoreset=True)
+
+def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
+    print(f"{style}{color}{text}")
 
 def display_intro():
-    intro = """
+    intro = f"""{Fore.CYAN}{Style.BRIGHT}
  _______ ____  _____
 |__   __|  _ \|__  /
    | |  | |_) | / / 
    | |  |  __/ / /_ 
    |_|  |_|   /____|
    
-Text Parsing Zone?    """
+{Fore.YELLOW}Text Parsing Zone?{Style.RESET_ALL}    """
     print(intro)
 
 def convert_to_wav(input_file):
@@ -26,10 +34,10 @@ def convert_to_wav(input_file):
     output_file = os.path.splitext(input_file)[0] + '.wav'
     try:
         subprocess.run(['ffmpeg', '-i', input_file, output_file], check=True)
-        print(f"Converted {input_file} to {output_file}")
+        print_colored(f"Converted {input_file} to {output_file}", Fore.GREEN)
         return output_file
     except subprocess.CalledProcessError as e:
-        print(f"Error converting file to WAV: {e}")
+        print_colored(f"Error converting file to WAV: {e}", Fore.RED)
         return None
 
 def split_audio(file_path, max_size_mb=24):
@@ -47,7 +55,7 @@ def split_audio(file_path, max_size_mb=24):
         chunks.append(chunk_file)
         
         # Debug logging
-        print(f"Chunk {i}: Start={chunk_start}ms, End={chunk_end}ms, Duration={chunk_end-chunk_start}ms, Size={os.path.getsize(chunk_file)} bytes")
+        print_colored(f"Chunk {i}: Start={chunk_start}ms, End={chunk_end}ms, Duration={chunk_end-chunk_start}ms, Size={os.path.getsize(chunk_file)} bytes", Fore.YELLOW)
     
     return chunks
 
@@ -62,26 +70,28 @@ def transcribe_audio(audio_file):
             )
         return transcription
     except Exception as e:
-        print(f"Error in transcription: {e}")
+        print_colored(f"Error in transcription: {e}", Fore.RED)
         return None
 
 def load_diarization_pipeline():
     try:
-        print("Attempting to load the diarization pipeline...")
-        pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization@2.1",
+        print_colored("Attempting to load the diarization pipeline...", Fore.CYAN)
+        pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization-3.1",
                                             use_auth_token=HUGGING_FACE_TOKEN)
-        print("Diarization pipeline loaded successfully.")
+        print_colored("Diarization pipeline loaded successfully.", Fore.GREEN)
         return pipeline
     except Exception as e:
-        print(f"Error loading diarization pipeline: {e}")
-        print("\nTroubleshooting steps:")
+        print_colored(f"Error loading diarization pipeline: {e}", Fore.RED)
+        print_colored("\nTroubleshooting steps:", Fore.YELLOW)
         print("1. Ensure you have an active internet connection.")
-        print("2. Verify that you've accepted the user conditions at https://hf.co/pyannote/speaker-diarization")
+        print("2. Verify that you've accepted the user conditions at https://huggingface.co/pyannote/speaker-diarization-3.1")
         print("3. Check that your Hugging Face token is correct in the .env file.")
         print("4. Try running 'huggingface-cli login' in your terminal and enter your token when prompted.")
         print("5. If the issue persists, try clearing your Hugging Face cache:")
         print("   - On macOS/Linux: rm -rf ~/.cache/huggingface")
         print("   - On Windows: rmdir /s /q %USERPROFILE%\\.cache\\huggingface")
+        print("6. Ensure that you have the latest version of pyannote.audio installed:")
+        print("   pip install --upgrade pyannote.audio")
         sys.exit(1)
 
 def transcribe_and_diarize(audio_file, perform_diarization=False):
@@ -90,7 +100,7 @@ def transcribe_and_diarize(audio_file, perform_diarization=False):
         transcriptions = []
         
         for chunk in chunks:
-            print(f"Transcribing chunk: {chunk}")
+            print_colored(f"Transcribing chunk: {chunk}", Fore.CYAN)
             transcription = transcribe_audio(chunk)
             if transcription is None:
                 return None
@@ -103,20 +113,32 @@ def transcribe_and_diarize(audio_file, perform_diarization=False):
 
         diarization_pipeline = load_diarization_pipeline()
 
-        print("Performing speaker diarization...")
+        print_colored("Performing speaker diarization...", Fore.MAGENTA)
         diarization = diarization_pipeline(audio_file)
 
-        print("Combining transcription with speaker labels...")
+        print_colored("Combining transcription with speaker labels...", Fore.BLUE)
         diarized_transcript = []
+        
+        # Get the total duration of the audio
+        total_duration = max(segment.end for segment in diarization.get_timeline())
+        
         for turn, _, speaker in diarization.itertracks(yield_label=True):
-            segment_start = turn.start
-            segment_end = turn.end
-            segment_text = full_transcription[segment_start:segment_end]
-            diarized_transcript.append(f"Speaker {speaker}: {segment_text}")
+            start_time = turn.start
+            end_time = turn.end
+            
+            # Find the corresponding text in the full transcription
+            start_ratio = start_time / total_duration
+            end_ratio = end_time / total_duration
+            start_char = int(start_ratio * len(full_transcription))
+            end_char = int(end_ratio * len(full_transcription))
+            
+            segment_text = full_transcription[start_char:end_char].strip()
+            if segment_text:
+                diarized_transcript.append(f"Speaker {speaker}: {segment_text}")
 
         return "\n".join(diarized_transcript)
     except Exception as e:
-        print(f"Error in transcription and diarization: {e}")
+        print_colored(f"Error in transcription and diarization: {e}", Fore.RED)
         return None
 
 def read_competency_definitions(file_path):
@@ -124,7 +146,7 @@ def read_competency_definitions(file_path):
         with open(file_path, 'r') as file:
             return file.read()
     except Exception as e:
-        print(f"Error reading competency definitions: {e}")
+        print_colored(f"Error reading competency definitions: {e}", Fore.RED)
         return None
 
 def extract_competency_insights(transcript, competency_definitions):
@@ -137,7 +159,7 @@ def extract_competency_insights(transcript, competency_definitions):
         }
         
         prompt = f"""
-        Analyze the following transcript and extract insights about student competency development based on the provided competency definitions. Generate an HTML report that includes an analysis for EACH of the competencies in the competency definitions text. Focus on identifying evidence of competency development, areas for improvement, and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
+        Analyze the following transcript and extract insights about student competency development based on the provided competency definitions. Generate an HTML report that includes an analysis for EACH of the competencies in the competency definitions text. Focus on identifying evidence of competency development, areas for improvement, and specific examples from the transcript that demonstrate competency-related behaviors or knowledge. NOTE: IF this transcript has more than one speaker in it, proceed accordingly and identify the speakers according to the input you're given.
 
         Competency Definitions:
         {competency_definitions}
@@ -199,7 +221,7 @@ def extract_competency_insights(transcript, competency_definitions):
             <section id="overview">
                 <h2>Overview</h2>
                 <div class="overview-grid">
-                    <!-- Include the list of competencies here in two columns -->
+                    <!-- Include an overview stating the objective and description of the report here, including whether it's for one student or multiple, according to the sample provided. Include the list of competencies here in two columns -->
                 </div>
                 <!-- Include the brief description of the report here -->
             </section>
@@ -214,13 +236,13 @@ def extract_competency_insights(transcript, competency_definitions):
              <section id="Overall Assessment">
                 <h2>Overview</h2>
                 <div class="overall-grid">
-                    <!-- include the overall assessment here -->
+                    <!-- include the overall assessment here, again if this is more than one student, proceed accordingly here and identify the students according to the info provided. -->
                 </div>
             </section>
         </body>
         </html>
 
-        Ensure that your response is a complete, valid HTML document with the competencies listed in the overview section arranged in two columns, 6 rows per column, and the competency insights section also arranged in two columns, 6 rows per column.
+        Ensure that your response is a complete, valid HTML document with the competencies listed in the overview section arranged in two columns, 7 rows per column, and the competency insights section also arranged in two columns, 7 rows per column.  Remember if this transcript has more than one speaker in it, proceed accordingly and compose/format the report with those considerations.
         """
         
         data = {
@@ -230,58 +252,80 @@ def extract_competency_insights(transcript, competency_definitions):
             ]
         }
 
+        print_colored("Fluxing capacitors...", Fore.CYAN)
         response = requests.post(OPENROUTER_URL, headers=headers, json=data)
         response.raise_for_status()
         response_json = response.json()
 
+        print_colored("Capacitors sufficiently fluxed... stable levels of flux, anyway.", Fore.GREEN)
         return response_json['choices'][0]['message']['content']
     except requests.RequestException as e:
-        print(f"Error in API request: {e}")
+        print_colored(f"Error in API request: {e}", Fore.RED)
         return None
     except Exception as e:
-        print(f"Error in competency insight extraction: {e}")
+        print_colored(f"Error in competency insight extraction: {e}", Fore.RED)
         return None
 
 def main(perform_diarization):
     display_intro()
     
-    audio_file = input("Enter the name of the audio file: ")
-    competency_file = input("Enter the name of the competencies file: ")
+    audio_file = input(f"{Fore.YELLOW}Enter the name of the audio file: {Style.RESET_ALL}")
+    competency_file = input(f"{Fore.YELLOW}Enter the name of the competencies file: {Style.RESET_ALL}")
+    sound_file = input(f"{Fore.YELLOW}Enter the name of the sound file to play when done: {Style.RESET_ALL}")
 
     if not os.path.exists(audio_file):
-        print(f"Error: The audio file {audio_file} does not exist.")
+        print_colored(f"Error: The audio file {audio_file} does not exist.", Fore.RED)
         return
 
     if not os.path.exists(competency_file):
-        print(f"Error: The competency definition file {competency_file} does not exist.")
+        print_colored(f"Error: The competency definition file {competency_file} does not exist.", Fore.RED)
+        return
+
+    if not os.path.exists(sound_file):
+        print_colored(f"Error: The sound file {sound_file} does not exist.", Fore.RED)
         return
 
     wav_file = convert_to_wav(audio_file)
     if wav_file is None:
         return
 
-    print("Transcribing audio..." + (" and performing diarization" if perform_diarization else ""))
+    print_colored(f"{'[INIT]':=^40}", Fore.CYAN)
+    print_colored("Transcribing audio..." + (" and performing diarization" if perform_diarization else ""), Fore.CYAN)
+    print_colored(f"{'[PROCESSING]':=^40}", Fore.CYAN)
+    
+
+    
     transcript = transcribe_and_diarize(wav_file, perform_diarization)
     if transcript is None:
         return
 
-    print("Reading competency definitions...")
+    print_colored("Reading competency definitions...", Fore.CYAN)
     competency_definitions = read_competency_definitions(competency_file)
     if competency_definitions is None:
         return
 
-    print("Extracting competency insights and generating HTML report...")
+    print_colored("Extracting competency insights and generating HTML report...", Fore.CYAN)
     html_report = extract_competency_insights(transcript, competency_definitions)
     if html_report is None:
         return
 
-    print("\nWriting output to report.html...")
+    print_colored("\nWriting output to report.html...", Fore.CYAN)
     try:
         with open('report.html', 'w', encoding='utf-8') as report_file:
             report_file.write(html_report)
-        print("Report successfully written to report.html")
+        print_colored("Report successfully written to report.html", Fore.GREEN)
+        
+        
+        print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
+        
+        # Play the sound when the report is complete
+        try:
+            playsound(sound_file)
+            print_colored("Played completion sound", Fore.GREEN)
+        except Exception as e:
+            print_colored(f"Error playing sound: {e}", Fore.RED)
     except Exception as e:
-        print(f"Error writing to report.html: {e}")
+        print_colored(f"Error writing to report.html: {e}", Fore.RED)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process audio file for transcription, optional diarization, and competency insight extraction.")
