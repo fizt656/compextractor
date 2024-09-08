@@ -4,6 +4,9 @@
 
 This prototype tool extracts student competency insights from audio recordings of presentations or discussions. It now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations.
 
+![General Screenshot](general_screenshot.png)
+*Figure 1: General overview of the Competency Extractor in action*
+
 ## Prerequisites
 
 - Python 3.7 or higher
@@ -70,6 +73,17 @@ The combined output mode provides both narrative insights and data visualization
    - Narrative competency insights for each speaker
    - Radar chart visualizations of competency ratings
    - Overall assessment of competencies
+
+   Here are examples of the output you can expect:
+
+   ![Competency Analysis](competency_analysis.png)
+   *Figure 2: Detailed competency analysis for a specific skill area*
+
+   ![Overall Assessment](overall_assessment.png)
+   *Figure 3: Overall assessment of competencies across multiple areas*
+
+   ![Radar Chart](radar_chart.png)
+   *Figure 4: Radar chart visualization of competency ratings*
 
 2. **Multi-Speaker Support**: 
    - Automatically performs diarization to identify different speakers
