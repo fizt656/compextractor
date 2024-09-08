@@ -24,14 +24,16 @@ def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
     playsound('coin.mp3')
 
 def display_intro():
-    intro = f"""{Fore.CYAN}{Style.BRIGHT}
- _______ ____  _____
-|__   __|  _ \|__  /
-   | |  | |_) | / / 
-   | |  |  __/ / /_ 
-   |_|  |_|   /____|
-   
-{Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}    """
+    intro = f"""
+    {Fore.CYAN}████████╗{Fore.MAGENTA}██████╗ {Fore.YELLOW}███████╗
+    {Fore.CYAN}╚══██╔══╝{Fore.MAGENTA}██╔══██╗{Fore.YELLOW}╚══███╔╝
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██████╔╝{Fore.YELLOW}  ███╔╝ 
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██╔═══╝ {Fore.YELLOW} ███╔╝  
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██║     {Fore.YELLOW}███████╗
+    {Fore.CYAN}   ╚═╝   {Fore.MAGENTA}╚═╝     {Fore.YELLOW}╚══════╝
+                             
+{Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}
+    """
     print(intro)
 
 def play_background_music():
