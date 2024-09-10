@@ -1,4 +1,4 @@
-![ZoneSight](banner.jpg)
+![ZoneSight](banner.png)
 
 **Update**: OK... so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
 
