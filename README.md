@@ -1,13 +1,13 @@
-![Competency Extractor](banner.jpg)
+![ZoneSight](banner.jpg)
 
 **Update**: OK... so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
 
-# Competency Extractor
+# ZoneSight (Early Prototype)
 
-This prototype tool extracts student competency insights from audio recordings of presentations or discussions. It now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations.
+This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross (hehe), ZoneSight does now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations. Please note that as a prototype, some features may be experimental and subject to refinement.
 
 ![General Screenshot](general_screenshot.png)
-*Figure 1: General overview of the Competency Extractor in action*
+*Figure 1: General overview of ZoneSight prototype in action*
 
 ## Prerequisites
 
@@ -54,6 +54,8 @@ This prototype tool extracts student competency insights from audio recordings o
 
 ## Usage
 
+As ZoneSight is an early prototype, please be aware that the user experience and output may vary. We appreciate your patience and feedback as we continue to improve the tool.
+
 1. Prepare your audio file (MP3, MP4, WAV) and competencies file (text file with definitions).
 
 2. Run the combined script:
@@ -69,7 +71,7 @@ This prototype tool extracts student competency insights from audio recordings o
 
 ## Combined Narrative and Data Output
 
-The combined output mode provides both narrative insights and data visualizations in a single report:
+The combined output mode, a key feature of this prototype, provides both narrative insights and data visualizations in a single report:
 
 1. **Integrated Analysis**: Generates `combined_report.html` containing:
    - Narrative competency insights for each speaker
@@ -125,11 +127,11 @@ Use the `--diarize` flag for multi-speaker analysis and `--visualize` for radar 
 
 ## Example Files and Testing
 
-Example files for testing:
-- `test.wav`: Short sample audio
+To help you explore this early prototype, we've included some example files for testing:
+- `test.wav`: Short sample audio (individual student)
 - `test.txt`: Sample competencies file
-- `longer_test.wav`: Longer sample audio
-- `multi-speaker-discussion.wav`: Sample for testing diarization
+- `longer_test.wav`: Longer sample audio (individual student)
+- `multi-speaker-discussion.wav`: Sample for testing diarization (group of 6 speakers chatting very naturally and organically about the program they are part of SOURCE: Full Sail University podcast)
 
 To test:
 1. Activate your virtual environment.
@@ -146,6 +148,8 @@ To test:
 
 ## Notes and Recommendations
 
+As this is an early prototype, we encourage experimentation and welcome your feedback:
+
 - Customize system prompts in script files to suit specific needs.
 - Experiment with different ways of querying the competencies file.
 - Change LLMs by editing your environment. Recommended:
@@ -159,11 +163,18 @@ To test:
 
 ## Future Improvements
 
+ZoneSight is continuously evolving. As we refine this prototype, we're considering the following enhancements:
+
 - Batch processing for multiple audio files
 - User-friendly GUI
 - Improved diarization accuracy
 - Enhanced visualization options
 - Comparative analysis features for multi-speaker recordings
-- Customizable report formats
+- Customizable report formats, sent to different stakeholders (different 'insights packages' to R&E, C&I, Communications, KM, etc)
+- Refined competency extraction algorithms
+- Integration with learning management systems
+- Real-time analysis capabilities
+
+We value your input in shaping the future of ZoneSight. If you have any ideas or encounter any issues while using this early prototype, please don't hesitate to share your feedback.
 
 Other Ideas? \\m//
