@@ -4,11 +4,7 @@
 
 # ZoneSight (Early Prototype)
 
-This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross (hehe), ZoneSight now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations. Please note that as a prototype, some features may be experimental and subject to refinement.
-
-![General Screenshot](general_screenshot.png)
-*Figure 1: General overview of ZoneSight prototype in action*
-
+This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross git status
 ## Prerequisites
 
 - Python 3.7 or higher
