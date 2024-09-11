@@ -25,14 +25,14 @@ def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
 
 def display_intro():
     intro = f"""
-    {Fore.CYAN}████████╗{Fore.MAGENTA}██████╗ {Fore.YELLOW}███████╗
-    {Fore.CYAN}╚══██╔══╝{Fore.MAGENTA}██╔══██╗{Fore.YELLOW}╚══███╔╝
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██████╔╝{Fore.YELLOW}  ███╔╝ 
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██╔═══╝ {Fore.YELLOW} ███╔╝  
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██║     {Fore.YELLOW}███████╗
-    {Fore.CYAN}   ╚═╝   {Fore.MAGENTA}╚═╝     {Fore.YELLOW}╚══════╝
+    {Fore.CYAN}███████╗ {Fore.MAGENTA}██████╗ {Fore.YELLOW}███╗   ██╗{Fore.GREEN}███████╗{Fore.BLUE}███████╗{Fore.RED}██╗ ██████╗ {Fore.WHITE}██╗  ██╗{Fore.CYAN}████████╗
+    {Fore.CYAN}╚══███╔╝{Fore.MAGENTA}██╔═══██╗{Fore.YELLOW}████╗  ██║{Fore.GREEN}██╔════╝{Fore.BLUE}██╔════╝{Fore.RED}██║██╔════╝ {Fore.WHITE}██║  ██║{Fore.CYAN}╚══██╔══╝
+    {Fore.CYAN}  ███╔╝ {Fore.MAGENTA}██║   ██║{Fore.YELLOW}██╔██╗ ██║{Fore.GREEN}█████╗  {Fore.BLUE}███████╗{Fore.RED}██║██║  ███╗{Fore.WHITE}███████║{Fore.CYAN}   ██║   
+    {Fore.CYAN} ███╔╝  {Fore.MAGENTA}██║   ██║{Fore.YELLOW}██║╚██╗██║{Fore.GREEN}██╔══╝  {Fore.BLUE}╚════██║{Fore.RED}██║██║   ██║{Fore.WHITE}██╔══██║{Fore.CYAN}   ██║   
+    {Fore.CYAN}███████╗{Fore.MAGENTA}╚██████╔╝{Fore.YELLOW}██║ ╚████║{Fore.GREEN}███████╗{Fore.BLUE}███████║{Fore.RED}██║╚██████╔╝{Fore.WHITE}██║  ██║{Fore.CYAN}   ██║   
+    {Fore.CYAN}╚══════╝{Fore.MAGENTA} ╚═════╝ {Fore.YELLOW}╚═╝  ╚═══╝{Fore.GREEN}╚══════╝{Fore.BLUE}╚══════╝{Fore.RED}╚═╝ ╚═════╝ {Fore.WHITE}╚═╝  ╚═╝{Fore.CYAN}   ╚═╝   
                              
-{Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}
+{Fore.YELLOW}ZoneSight - Combined Narrative and Data Output{Style.RESET_ALL}
     """
     print(intro)
 

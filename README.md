@@ -1,10 +1,10 @@
 ![ZoneSight](banner.png)
 
-**Update**: OK... so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
+**Update**: OK,.. so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
 
 # ZoneSight (Early Prototype)
 
-This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross (hehe), ZoneSight does now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations. Please note that as a prototype, some features may be experimental and subject to refinement.
+This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross (hehe), ZoneSight now features a combined mode that provides both narrative and visual outputs, including multi-speaker analysis through diarization and radar graph visualizations. Please note that as a prototype, some features may be experimental and subject to refinement.
 
 ![General Screenshot](general_screenshot.png)
 *Figure 1: General overview of ZoneSight prototype in action*
@@ -58,16 +58,30 @@ As ZoneSight is an early prototype, please be aware that the user experience and
 
 1. Prepare your audio file (MP3, MP4, WAV) and competencies file (text file with definitions).
 
-2. Run the combined script:
+2. **Important**: Before running the script, make sure to customize the `test.txt` file with your own competency definitions and update the system prompt in `src/main_combined.py` to match your specific needs. See the [Customization](#customization) section for more details.
+
+3. Run the combined script:
    ```bash
    python src/main_combined.py
    ```
 
-3. Enter file names when prompted (audio, competencies, completion sound).
+4. Enter file names when prompted (audio, competencies, completion sound).
 
-4. The script will process the audio and generate a `combined_report.html` file.
+5. The script will process the audio and generate a `combined_report.html` file.
 
-5. Open the HTML file in a web browser to view the comprehensive report.
+6. Open the HTML file in a web browser to view the comprehensive report.
+
+## Customization
+
+To adapt ZoneSight to your specific needs:
+
+1. **Competency Definitions**: Edit the `test.txt` file to include your own competency definitions. Each competency should be on a new line, with its name followed by a colon and a brief description.
+
+2. **System Prompt**: In `src/main_combined.py`, locate the `extract_competency_insights` function. Modify the `prompt` variable to reflect your specific requirements for competency analysis.
+
+3. **Output Customization**: If needed, you can modify the `generate_combined_report` function in `src/main_combined.py` to adjust the HTML structure and styling of the output report.
+
+Remember to test your changes thoroughly to ensure they work as expected with your specific use case.
 
 ## Combined Narrative and Data Output
 
@@ -107,31 +121,13 @@ The combined output mode, a key feature of this prototype, provides both narrati
    - Labeled with speaker tags (e.g., SPEAKER_00, SPEAKER_01)
    - Provide intuitive visual representation of strengths and areas for development
 
-## Separate Scripts for Narrative and Data Output
-
-While the combined script is recommended for most use cases, separate scripts for narrative and data output are available and can sometimes yield better results, particularly with multi-speaker inputs:
-
-- For narrative output only:
-  ```bash
-  python src/main.py [--diarize]
-  ```
-  Generates `report.html` with transcript and competency insights.
-
-- For data output with radar graphs:
-  ```bash
-  python src/main_data.py [--diarize] [--visualize]
-  ```
-  Generates `competency_data.json` and individual radar chart HTML files.
-
-Use the `--diarize` flag for multi-speaker analysis and `--visualize` for radar charts (where applicable).
-
 ## Example Files and Testing
 
 To help you explore this early prototype, we've included some example files for testing:
 - `test.wav`: Short sample audio (individual student)
 - `test.txt`: Sample competencies file
 - `longer_test.wav`: Longer sample audio (individual student)
-- `multi-speaker-discussion.wav`: Sample for testing diarization (group of 6 speakers chatting very naturally and organically about the program they are part of SOURCE: Full Sail University podcast)
+- `multi-speaker-discussion.wav`: Sample for testing diarization (group of 6 speakers chatting very naturally and organically about their educational program SOURCE: Full Sail University podcast)
 
 To test:
 1. Activate your virtual environment.
@@ -141,7 +137,7 @@ To test:
    - Competencies file: `test.txt`
    - Sound file: `sound.mp3`
 
-## Additional Stuff
+## Additional Features
 
 - **Large File Handling**: Automatically splits large audio files into smaller chunks for processing.
 - **Multi-Speaker Support**: Identifies different speakers and provides speaker-specific analysis.
@@ -170,11 +166,15 @@ ZoneSight is continuously evolving. As we refine this prototype, we're consideri
 - Improved diarization accuracy
 - Enhanced visualization options
 - Comparative analysis features for multi-speaker recordings
-- Customizable report formats, sent to different stakeholders (different 'insights packages' to R&E, C&I, Communications, KM, etc)
+- Customizable report formats for different stakeholders (various 'insights packages')
 - Refined competency extraction algorithms
 - Integration with learning management systems
 - Real-time analysis capabilities
 
 We value your input in shaping the future of ZoneSight. If you have any ideas or encounter any issues while using this early prototype, please don't hesitate to share your feedback.
+
+## License
+
+This project is licensed under a dual license: MIT License for open-source use and a prohibition on commercial use without explicit permission. Please see the LICENSE file for full details.
 
 Other Ideas? \\m//
