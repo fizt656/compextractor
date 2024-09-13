@@ -4,7 +4,7 @@
 
 # ZoneSight (Early Prototype)
 
-This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross git status
+This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross... as with all good prototypes.
 ## Prerequisites
 
 - Python 3.7 or higher
