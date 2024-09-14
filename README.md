@@ -1,10 +1,9 @@
 ![ZoneSight](banner.png)
 
-**Update**: OK,.. so after some fiddling, the multi-speaker diarization works, and so does the combined report, showing the narrative AND radar charts for each person in the recording.
-
 # ZoneSight (Early Prototype)
 
-This early prototype tool extracts student competency insights from audio recordings of presentations or discussions. Although it's still kind of sketchy here and there and there are issues to solve and chasms to cross... as with all good prototypes.
+This early prototype tool extracts student competency insights from audio recordings of presentations, reflections, discussions, meetings, or ANY informal organic conversation. The audio is transcribed, multiple speakers labeled, analyzed for competencies (using deep contextual analysis to pick up nuanced reflection on competencies, NOT key-word based).  Then, a formatted report is generated and saved to the working directory.
+
 ## Prerequisites
 
 - Python 3.7 or higher
