@@ -169,8 +169,9 @@ ZoneSight is continuously evolving. As we refine this prototype, we're consideri
 
 We value your input in shaping the future of ZoneSight. If you have any ideas or encounter any issues while using this early prototype, please don't hesitate to share your feedback.
 
+Other Ideas? \\m//
+
 ## License
 
 This project is licensed under a dual license: MIT License for open-source use and a prohibition on commercial use without explicit permission. Please see the LICENSE file for full details.
 
-Other Ideas? \\m//
