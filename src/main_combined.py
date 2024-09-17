@@ -89,9 +89,9 @@ def transcribe_audio(audio_file):
             transcription = client.audio.transcriptions.create(
                 model="whisper-1", 
                 file=audio, 
-                response_format="text"
+                response_format="verbose_json"
             )
-        return transcription
+        return transcription.segments
     except Exception as e:
         print_colored(f"Error in transcription: {e}", Fore.RED)
         return None
@@ -127,15 +127,13 @@ def transcribe_and_diarize(audio_file, perform_diarization=True):
             transcription = transcribe_audio(chunk)
             if transcription is None:
                 return None
-            transcriptions.append(transcription)
+            transcriptions.extend(transcription)
         
-        full_transcription = " ".join(transcriptions)
-
         # Save the transcription before diarization
-        save_transcript(full_transcription, audio_file, "before_diarization")
+        save_transcript(transcriptions, audio_file, "before_diarization")
 
         if not perform_diarization:
-            return {"Speaker 1": full_transcription}
+            return {"Speaker 1": " ".join([segment['text'] for segment in transcriptions])}
 
         diarization_pipeline = load_diarization_pipeline()
 
@@ -145,22 +143,24 @@ def transcribe_and_diarize(audio_file, perform_diarization=True):
         print_colored("Combining transcription with speaker labels...", Fore.BLUE)
         speaker_transcripts = {}
         
-        total_duration = max(segment.end for segment in diarization.get_timeline())
-        
-        for turn, _, speaker in diarization.itertracks(yield_label=True):
-            start_time = turn.start
-            end_time = turn.end
+        for segment in transcriptions:
+            start_time = segment['start']
+            end_time = segment['end']
+            text = segment['text']
             
-            start_ratio = start_time / total_duration
-            end_ratio = end_time / total_duration
-            start_char = int(start_ratio * len(full_transcription))
-            end_char = int(end_ratio * len(full_transcription))
+            # Find the speaker for this segment
+            speaker = None
+            for turn, _, spk in diarization.itertracks(yield_label=True):
+                if turn.start <= start_time < turn.end:
+                    speaker = spk
+                    break
             
-            segment_text = full_transcription[start_char:end_char].strip()
-            if segment_text:
-                if speaker not in speaker_transcripts:
-                    speaker_transcripts[speaker] = []
-                speaker_transcripts[speaker].append(segment_text)
+            if speaker is None:
+                speaker = "Unknown"
+            
+            if speaker not in speaker_transcripts:
+                speaker_transcripts[speaker] = []
+            speaker_transcripts[speaker].append(text)
 
         for speaker in speaker_transcripts:
             speaker_transcripts[speaker] = " ".join(speaker_transcripts[speaker])
@@ -184,8 +184,11 @@ def save_transcript(transcript, audio_file, stage):
             if isinstance(transcript, dict):
                 for speaker, text in transcript.items():
                     file.write(f"{speaker}:\n{text}\n\n")
+            elif isinstance(transcript, list):
+                for segment in transcript:
+                    file.write(f"{segment['start']:.2f} - {segment['end']:.2f}: {segment['text']}\n")
             else:
-                file.write(transcript)
+                file.write(str(transcript))
         
         print_colored(f"Saved {stage} transcript to {filename}", Fore.GREEN)
     except Exception as e:
@@ -232,130 +235,6 @@ def extract_competency_insights(transcript, competency_definitions):
         6. OVERALL ASSESSMENT of the student's competency development in a final section
 
         Use appropriate HTML tags to structure your report. Include inline CSS for basic styling. Ensure the HTML is well-formatted and easy to read.
-        """
-        
-        data = {
-            "model": OPENROUTER_MODEL,
-            "messages": [
-                {"role": "user", "content": prompt}
-            ]
-        }
-
-        print_colored("Extracting competency insights...", Fore.CYAN)
-        response = requests.post(OPENROUTER_URL, headers=headers, json=data)
-        response.raise_for_status()
-        response_json = response.json()
-
-        print_colored("Competency insights extracted successfully.", Fore.GREEN)
-        return response_json['choices'][0]['message']['content']
-    except requests.RequestException as e:
-        print_colored(f"Error in API request: {e}", Fore.RED)
-        return None
-    except Exception as e:
-        print_colored(f"Error in competency insight extraction: {e}", Fore.RED)
-        return None
-
-def extract_competency_data(transcript, competency_definitions):
-    try:
-        headers = {
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "HTTP-Referer": SITE_URL,
-            "X-Title": SITE_NAME,
-            "Content-Type": "application/json"
-        }
-        
-        prompt = f"""
-        Analyze the following transcript and extract quantitative data about student competency development based on the provided competency definitions. Generate a JSON object that includes ratings and observations for EACH of the competencies in the competency definitions text. Focus on providing numerical ratings and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
-
-        Competency Definitions:
-        {competency_definitions}
-
-        Transcript:
-        {transcript}
-
-        Please provide a structured JSON object with the following format:
-        {{
-            "competencies": [
-                {{
-                    "name": "Competency Name",
-                    "rating": 0-10,
-                    "observations": [
-                        "Specific example or observation from the transcript",
-                        "Another example or observation"
-                    ],
-                    "areas_for_improvement": [
-                        "Suggestion for improvement",
-                        "Another suggestion"
-                    ]
-                }},
-                // ... repeat for all competencies
-            ],
-            "overall_assessment": "A brief overall assessment of the student's competency development"
-        }}
-
-        Ensure that you provide a rating between 0 and 10 for each competency, with 0 being the lowest and 10 being the highest level of competency demonstrated. Include at least two specific observations and two areas for improvement for each competency.
-        """
-        
-        data = {
-            "model": OPENROUTER_MODEL,
-            "messages": [
-                {"role": "user", "content": prompt}
-            ]
-        }
-
-        print_colored("Extracting competency insights...", Fore.CYAN)
-        response = requests.post(OPENROUTER_URL, headers=headers, json=data)
-        response.raise_for_status()
-        response_json = response.json()
-
-        print_colored("Competency insights extracted successfully.", Fore.GREEN)
-        return response_json['choices'][0]['message']['content']
-    except requests.RequestException as e:
-        print_colored(f"Error in API request: {e}", Fore.RED)
-        return None
-    except Exception as e:
-        print_colored(f"Error in competency insight extraction: {e}", Fore.RED)
-        return None
-
-def extract_competency_data(transcript, competency_definitions):
-    try:
-        headers = {
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "HTTP-Referer": SITE_URL,
-            "X-Title": SITE_NAME,
-            "Content-Type": "application/json"
-        }
-        
-        prompt = f"""
-        Analyze the following transcript and extract quantitative data about student competency development based on the provided competency definitions. Generate a JSON object that includes ratings and observations for EACH of the competencies in the competency definitions text. Focus on providing numerical ratings and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
-
-        Competency Definitions:
-        {competency_definitions}
-
-        Transcript:
-        {transcript}
-
-        Please provide a structured JSON object with the following format:
-        {{
-            "competencies": [
-                {{
-                    "name": "Competency Name",
-                    "rating": 0-10,
-                    "observations": [
-                        "Specific example or observation from the transcript",
-                        "Another example or observation"
-                    ],
-                    "areas_for_improvement": [
-                        "Suggestion for improvement",
-                        "Another suggestion"
-                    ]
-                }},
-                // ... repeat for all competencies
-            ],
-            "overall_assessment": "A brief overall assessment of the student's competency development"
-        }}
-
-        Ensure that you provide a rating between 0 and 10 for each competency, with 0 being the lowest and 10 being the highest level of competency demonstrated. Include at least two specific observations and two areas for improvement for each competency.
         """
         
         data = {
@@ -485,9 +364,11 @@ def main():
     background_music_thread = threading.Thread(target=play_background_music)
     background_music_thread.start()
 
-    
     audio_file = input(f"{Fore.YELLOW}Enter the name of the audio file: {Style.RESET_ALL}")
     competency_file = input(f"{Fore.YELLOW}Enter the name of the competencies file (TXT or RTF): {Style.RESET_ALL}")
+    
+    # Ask user if they want to perform diarization
+    perform_diarization = input(f"{Fore.YELLOW}Do you want to perform diarization? (yes/no): {Style.RESET_ALL}").lower() == 'yes'
 
     if not os.path.exists(audio_file):
         print_colored(f"Error: The audio file {audio_file} does not exist.", Fore.RED)
@@ -510,11 +391,10 @@ def main():
         return
 
     print_colored(f"{'[INIT]':=^40}", Fore.CYAN)
-    print_colored("Transcribing audio and performing diarization...", Fore.CYAN)
+    print_colored("Transcribing audio..." + (" and performing diarization..." if perform_diarization else ""), Fore.CYAN)
     print_colored(f"{'[PROCESSING]':=^40}", Fore.CYAN)
     
-    
-    speaker_transcripts = transcribe_and_diarize(wav_file, True)
+    speaker_transcripts = transcribe_and_diarize(wav_file, perform_diarization)
     if speaker_transcripts is None:
         stop_background_music()
         return
