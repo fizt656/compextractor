@@ -309,23 +309,28 @@ def create_radar_chart(competency_data, speaker):
     return figure
 
 def generate_combined_report(narrative_reports, competency_data):
-    combined_html = """
+    # First, let's download Plotly.js
+    plotly_js_url = "https://cdn.plot.ly/plotly-latest.min.js"
+    plotly_js_content = requests.get(plotly_js_url).text
+
+    combined_html = f"""
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Combined Competency Report</title>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>{plotly_js_content}</script>
         <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; }
-            h1, h2 { color: #2c3e50; }
-            .speaker-section { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
-            .radar-chart { width: 100%; height: 500px; }
+            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; }}
+            h1, h2 {{ color: #2c3e50; }}
+            .speaker-section {{ border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 5px; }}
+            .radar-chart {{ width: 100%; height: 500px; }}
         </style>
     </head>
     <body>
         <h1>Combined Competency Report</h1>
+        <p><strong>Note:</strong> If the radar charts are not visible, please ensure you're opening this file with a web browser and that JavaScript is enabled.</p>
     """
 
     for speaker, narrative in narrative_reports.items():
@@ -335,22 +340,36 @@ def generate_combined_report(narrative_reports, competency_data):
             <div>{narrative}</div>
             <div id="radar-chart-{speaker}" class="radar-chart"></div>
             <script>
-                var data = {json.dumps(competency_data[speaker])};
-                Plotly.newPlot('radar-chart-{speaker}', [{{
-                    type: 'scatterpolar',
-                    r: data.competencies.map(comp => comp.rating),
-                    theta: data.competencies.map(comp => comp.name),
-                    fill: 'toself'
-                }}], {{
-                    polar: {{ radialaxis: {{ visible: true, range: [0, 10] }} }},
-                    showlegend: false,
-                    title: 'Competency Radar Chart for {speaker}'
-                }});
+                (function() {{
+                    try {{
+                        console.log('Attempting to create chart for {speaker}');
+                        var data = {json.dumps(competency_data[speaker])};
+                        Plotly.newPlot('radar-chart-{speaker}', [{{
+                            type: 'scatterpolar',
+                            r: data.competencies.map(comp => comp.rating),
+                            theta: data.competencies.map(comp => comp.name),
+                            fill: 'toself'
+                        }}], {{
+                            polar: {{ radialaxis: {{ visible: true, range: [0, 10] }} }},
+                            showlegend: false,
+                            title: 'Competency Radar Chart for {speaker}'
+                        }}).then(function() {{
+                            console.log('Chart for {speaker} created successfully');
+                        }}).catch(function(err) {{
+                            console.error('Error creating chart for {speaker}:', err);
+                        }});
+                    }} catch (error) {{
+                        console.error('Error in chart creation for {speaker}:', error);
+                    }}
+                }})();
             </script>
         </div>
         """
 
     combined_html += """
+    <script>
+        console.log('All charts should be created now. If you don\'t see them, check the console for errors.');
+    </script>
     </body>
     </html>
     """
@@ -430,6 +449,7 @@ def main():
         with open(output_filename, 'w', encoding='utf-8') as report_file:
             report_file.write(combined_report)
         print_colored(f"Combined report successfully written to {output_filename}", Fore.GREEN)
+        print_colored(f"To view the report with radar charts, please open the HTML file in a web browser.", Fore.YELLOW)
 
         print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
         
