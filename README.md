@@ -6,7 +6,7 @@ This early prototype tool extracts student competency insights from audio record
 
 ## Prerequisites
 
-- Python 3.7 or higher
+- Python 3.11.x (tested 3.11.7 on PC and 3.11.10 on Mac, seems fine)
 - ffmpeg (for audio file conversion)
 
 ## Installation
@@ -53,7 +53,7 @@ As ZoneSight is an early prototype, please be aware that the user experience and
 
 1. Prepare your audio file (MP3, MP4, WAV) and competencies file (text file with definitions).
 
-2. **Important**: Before running the script, make sure to customize the `test.txt` file with your own competency definitions and update the system prompt in `src/main_combined.py` to match your specific needs. See the [Customization](#customization) section for more details.
+2. **Important**: Before running the script, make sure to customize the competency file and update the system prompt in `src/main_combined.py` to match your specific needs. See the [Customization](#customization) section for more details.
 
 3. Run the combined script:
    ```bash
@@ -70,11 +70,13 @@ As ZoneSight is an early prototype, please be aware that the user experience and
 
 To adapt ZoneSight to your specific needs:
 
-1. **Competency Definitions**: Edit the `test.txt` file to include your own competency definitions. Each competency should be on a new line, with its name followed by a colon and a brief description.
+1. **Competency Definitions**: Create a custom competency file (e.g., `custom_competencies.txt`) with your own competency definitions. Each competency should be on a new line, with its name followed by a colon and a brief description.
 
-2. **System Prompt**: In `src/main_combined.py`, locate the `extract_competency_insights` function. Modify the `prompt` variable to reflect your specific requirements for competency analysis.
+2. **Main Script**: Create a custom version of `main_combined.py` (e.g., `custom_main_combined.py`) in the `src` directory. Modify the `extract_competency_insights` function by updating the `prompt` variable to reflect your specific requirements for competency analysis.
 
-3. **Output Customization**: If needed, you can modify the `generate_combined_report` function in `src/main_combined.py` to adjust the HTML structure and styling of the output report.
+3. **System Prompt**: In your custom `main_combined.py`, locate the `extract_competency_insights` function. Modify the `prompt` variable to reflect your specific requirements for competency analysis.
+
+4. **Output Customization**: If needed, you can modify the `generate_combined_report` function in your custom `main_combined.py` to adjust the HTML structure and styling of the output report.
 
 Remember to test your changes thoroughly to ensure they work as expected with your specific use case.
 
@@ -173,4 +175,14 @@ Other Ideas? \\m//
 ## License
 
 This project is licensed under a dual license: MIT License for open-source use and a prohibition on commercial use without explicit permission. Please see the LICENSE file for full details.
+
+## Important Note for Users
+
+Again, to use ZoneSight effectively for your specific needs, you'll need to create two custom files:
+
+1. **Custom Competency File**: Create a text file (e.g., `custom_competencies.txt`) that defines the competencies relevant to your context. This file should follow the format described in the [Customization](#customization) section.
+
+2. **Custom Main Combined Script**: Create a custom version of the `main_combined.py` script (e.g., `custom_main_combined.py`) in the `src` directory. This script should be tailored to your specific analysis requirements, including customized prompts and any additional processing logic you need.
+
+If your organization already uses ZoneSight, you may be able to obtain these custom files from a colleague. Otherwise, you'll need to create them based on your organization's competency framework and analysis needs.
 
