@@ -1,29 +1,31 @@
-﻿Magical Aptitude: The innate ability to perform and understand various forms of magic, serving as a foundation for all magical studies and practices.
+﻿Hogwarts School of Witchcraft and Wizardry Competency Definitions:
 
-Spellcasting Proficiency: The skill in accurately and effectively casting a wide range of spells, from basic charms to complex incantations.
+1. Magical Proficiency: The ability to cast spells, brew potions, and perform various magical tasks with skill and precision.
 
-Potion Brewing: The ability to understand ingredients, follow recipes, and create various potions with precision and care.
+2. Magical Theory: Understanding the fundamental principles and laws that govern magic, including its history, applications, and limitations.
 
-Magical Creatures Knowledge: Understanding and ability to interact safely and effectively with a diverse range of magical beasts and beings.
+3. Wand Mastery: Proficiency in handling and using a wand effectively for various magical purposes.
 
-Herbology Expertise: Proficiency in cultivating, identifying, and utilizing magical plants and their properties.
+4. Potion Making: The skill to prepare, mix, and create magical potions for different effects and purposes.
 
-Transfiguration Mastery: The ability to change the form or appearance of an object or being through magical means.
+5. Herbology Knowledge: Understanding magical plants, their properties, and how to care for and use them in various magical applications.
 
-Divination Insight: The capacity to interpret omens, predict future events, and understand hidden meanings through various divinatory methods.
+6. Magical Creatures Care: The ability to understand, handle, and care for various magical creatures safely and ethically.
 
-Defense Against the Dark Arts: Knowledge and practical skills in protecting oneself and others from dark magic and magical creatures.
+7. Divination: The skill to interpret omens, predict future events, and understand hidden meanings through various divinatory methods.
 
-Magical History and Theory: Understanding of magical lore, historical events, and theoretical foundations of magic.
+8. Defense Against the Dark Arts: Proficiency in recognizing, defending against, and countering dark magic and dangerous magical creatures.
 
-Broomstick Flying: Proficiency in maneuvering and controlling flying broomsticks for transportation and recreational activities like Quidditch.
+9. Transfiguration Skills: The ability to change the form or appearance of objects or living beings through magic.
 
-Wandlore and Craftsmanship: Knowledge of wand properties, materials, and the ability to create or repair magical implements.
+10. Charms Expertise: Proficiency in casting spells that add properties to objects or creatures without changing their fundamental nature.
 
-Magical Ethics and Responsibility: Understanding and adherence to ethical guidelines in the use of magic, including respect for magical and non-magical beings.
+11. Magical Ethics: Understanding and adhering to the ethical principles and laws governing the use of magic in the wizarding world.
 
-Wizarding World Integration: The ability to navigate both magical and non-magical (Muggle) societies with ease and discretion.
+12. Wizarding Culture Awareness: Knowledge of wizarding traditions, customs, and current events in the magical community.
 
-Magical Problem Solving: Applying magical knowledge and skills to overcome challenges and find innovative solutions to complex problems.
+13. Broomstick Flying: The skill to fly and maneuver on a broomstick with control and precision.
 
-Magical Teamwork and Cooperation: The capacity to work effectively with other witches and wizards, combining magical abilities to achieve common goals.
+14. Magical Problem-Solving: The ability to apply magical knowledge and skills to solve complex problems and overcome challenges.
+
+15. Teamwork and House Unity: The capacity to work collaboratively with fellow students, both within and across the four Hogwarts houses.

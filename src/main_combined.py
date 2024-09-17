@@ -25,20 +25,20 @@ def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
 
 def display_intro():
     intro = f"""
-    {Fore.CYAN}███████╗ {Fore.MAGENTA}██████╗ {Fore.YELLOW}███╗   ██╗{Fore.GREEN}███████╗{Fore.BLUE}███████╗{Fore.RED}██╗ ██████╗ {Fore.WHITE}██╗  ██╗{Fore.CYAN}████████╗
-    {Fore.CYAN}╚══███╔╝{Fore.MAGENTA}██╔═══██╗{Fore.YELLOW}████╗  ██║{Fore.GREEN}██╔════╝{Fore.BLUE}██╔════╝{Fore.RED}██║██╔════╝ {Fore.WHITE}██║  ██║{Fore.CYAN}╚══██╔══╝
-    {Fore.CYAN}  ███╔╝ {Fore.MAGENTA}██║   ██║{Fore.YELLOW}██╔██╗ ██║{Fore.GREEN}█████╗  {Fore.BLUE}███████╗{Fore.RED}██║██║  ███╗{Fore.WHITE}███████║{Fore.CYAN}   ██║   
-    {Fore.CYAN} ███╔╝  {Fore.MAGENTA}██║   ██║{Fore.YELLOW}██║╚██╗██║{Fore.GREEN}██╔══╝  {Fore.BLUE}╚════██║{Fore.RED}██║██║   ██║{Fore.WHITE}██╔══██║{Fore.CYAN}   ██║   
-    {Fore.CYAN}███████╗{Fore.MAGENTA}╚██████╔╝{Fore.YELLOW}██║ ╚████║{Fore.GREEN}███████╗{Fore.BLUE}███████║{Fore.RED}██║╚██████╔╝{Fore.WHITE}██║  ██║{Fore.CYAN}   ██║   
-    {Fore.CYAN}╚══════╝{Fore.MAGENTA} ╚═════╝ {Fore.YELLOW}╚═╝  ╚═══╝{Fore.GREEN}╚══════╝{Fore.BLUE}╚══════╝{Fore.RED}╚═╝ ╚═════╝ {Fore.WHITE}╚═╝  ╚═╝{Fore.CYAN}   ╚═╝   
+    {Fore.CYAN}████████╗{Fore.MAGENTA}██████╗ {Fore.YELLOW}███████╗
+    {Fore.CYAN}╚══██╔══╝{Fore.MAGENTA}██╔══██╗{Fore.YELLOW}╚══███╔╝
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██████╔╝{Fore.YELLOW}  ███╔╝ 
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██╔═══╝ {Fore.YELLOW} ███╔╝  
+    {Fore.CYAN}   ██║   {Fore.MAGENTA}██║     {Fore.YELLOW}███████╗
+    {Fore.CYAN}   ╚═╝   {Fore.MAGENTA}╚═╝     {Fore.YELLOW}╚══════╝
                              
-{Fore.YELLOW}ZoneSight - Combined Narrative and Data Output{Style.RESET_ALL}
+{Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}
     """
     print(intro)
 
 def play_background_music():
     mixer.init()
-    mixer.music.load('aquatic_ambience.mp3')
+    mixer.music.load('In the Zone.mp3')
     mixer.music.play(-1)  # -1 means loop indefinitely
 
 def stop_background_music():
@@ -407,8 +407,8 @@ def main():
     if not os.path.exists('coin.mp3'):
         print_colored(f"Error: The sound file coin.mp3 does not exist.", Fore.RED)
         return
-    if not os.path.exists('aquatic_ambience.mp3'):
-        print_colored(f"Error: The sound file aquatic_ambience.mp3 does not exist.", Fore.RED)
+    if not os.path.exists('In the Zone.mp3'):
+        print_colored(f"Error: The sound file In the Zone.mp3 does not exist.", Fore.RED)
         return
 
     wav_file = convert_to_wav(audio_file)
@@ -443,11 +443,14 @@ def main():
     print_colored("Generating combined report...", Fore.CYAN)
     combined_report = generate_combined_report(narrative_reports, competency_data)
 
-    print_colored("\nWriting output to combined_report.html...", Fore.CYAN)
+    print_colored("\nWriting output to results/combined_report.html...", Fore.CYAN)
     try:
-        with open('combined_report.html', 'w', encoding='utf-8') as report_file:
+        # Create the results directory if it doesn't exist
+        os.makedirs('results', exist_ok=True)
+        
+        with open('results/combined_report.html', 'w', encoding='utf-8') as report_file:
             report_file.write(combined_report)
-        print_colored("Combined report successfully written to combined_report.html", Fore.GREEN)
+        print_colored("Combined report successfully written to results/combined_report.html", Fore.GREEN)
 
         print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
         

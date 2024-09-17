@@ -12,3 +12,5 @@ playsound==1.2.2
 matplotlib==3.7.1
 plotly==5.14.1
 pygame==2.5.2
+PyObjC==10.3.1
+striprtf==0.0.21
