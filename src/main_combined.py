@@ -15,6 +15,8 @@ from playsound import playsound
 from pygame import mixer
 from cleanup import cleanup_temp_files
 import threading
+from striprtf.striprtf import rtf_to_text
+from datetime import datetime
 
 # Initialize colorama
 init(autoreset=True)
@@ -129,6 +131,9 @@ def transcribe_and_diarize(audio_file, perform_diarization=True):
         
         full_transcription = " ".join(transcriptions)
 
+        # Save the transcription before diarization
+        save_transcript(full_transcription, audio_file, "before_diarization")
+
         if not perform_diarization:
             return {"Speaker 1": full_transcription}
 
@@ -160,15 +165,42 @@ def transcribe_and_diarize(audio_file, perform_diarization=True):
         for speaker in speaker_transcripts:
             speaker_transcripts[speaker] = " ".join(speaker_transcripts[speaker])
 
+        # Save the transcription after diarization
+        save_transcript(speaker_transcripts, audio_file, "after_diarization")
+
         return speaker_transcripts
     except Exception as e:
         print_colored(f"Error in transcription and diarization: {e}", Fore.RED)
         return None
 
+def save_transcript(transcript, audio_file, stage):
+    try:
+        os.makedirs('results', exist_ok=True)
+        base_filename = os.path.splitext(os.path.basename(audio_file))[0]
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"results/transcript_{base_filename}_{stage}_{timestamp}.txt"
+        
+        with open(filename, 'w', encoding='utf-8') as file:
+            if isinstance(transcript, dict):
+                for speaker, text in transcript.items():
+                    file.write(f"{speaker}:\n{text}\n\n")
+            else:
+                file.write(transcript)
+        
+        print_colored(f"Saved {stage} transcript to {filename}", Fore.GREEN)
+    except Exception as e:
+        print_colored(f"Error saving {stage} transcript: {e}", Fore.RED)
+
 def read_competency_definitions(file_path):
     try:
-        with open(file_path, 'r') as file:
-            return file.read()
+        _, file_extension = os.path.splitext(file_path)
+        if file_extension.lower() == '.rtf':
+            with open(file_path, 'r') as file:
+                rtf_content = file.read()
+            return rtf_to_text(rtf_content)
+        else:  # Assume it's a .txt file or similar plain text format
+            with open(file_path, 'r') as file:
+                return file.read()
     except Exception as e:
         print_colored(f"Error reading competency definitions: {e}", Fore.RED)
         return None
@@ -181,7 +213,7 @@ def extract_competency_insights(transcript, competency_definitions):
             "X-Title": SITE_NAME,
             "Content-Type": "application/json"
         }
-        
+         
         prompt = f"""
         Analyze the following transcript and extract insights about student competency development based on the provided competency definitions. Generate an HTML report that includes an analysis for EACH of the competencies in the competency definitions text. Focus on identifying evidence of competency development, areas for improvement, and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
 
@@ -200,6 +232,68 @@ def extract_competency_insights(transcript, competency_definitions):
         6. OVERALL ASSESSMENT of the student's competency development in a final section
 
         Use appropriate HTML tags to structure your report. Include inline CSS for basic styling. Ensure the HTML is well-formatted and easy to read.
+        """
+        
+        data = {
+            "model": OPENROUTER_MODEL,
+            "messages": [
+                {"role": "user", "content": prompt}
+            ]
+        }
+
+        print_colored("Extracting competency insights...", Fore.CYAN)
+        response = requests.post(OPENROUTER_URL, headers=headers, json=data)
+        response.raise_for_status()
+        response_json = response.json()
+
+        print_colored("Competency insights extracted successfully.", Fore.GREEN)
+        return response_json['choices'][0]['message']['content']
+    except requests.RequestException as e:
+        print_colored(f"Error in API request: {e}", Fore.RED)
+        return None
+    except Exception as e:
+        print_colored(f"Error in competency insight extraction: {e}", Fore.RED)
+        return None
+
+def extract_competency_data(transcript, competency_definitions):
+    try:
+        headers = {
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "HTTP-Referer": SITE_URL,
+            "X-Title": SITE_NAME,
+            "Content-Type": "application/json"
+        }
+        
+        prompt = f"""
+        Analyze the following transcript and extract quantitative data about student competency development based on the provided competency definitions. Generate a JSON object that includes ratings and observations for EACH of the competencies in the competency definitions text. Focus on providing numerical ratings and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
+
+        Competency Definitions:
+        {competency_definitions}
+
+        Transcript:
+        {transcript}
+
+        Please provide a structured JSON object with the following format:
+        {{
+            "competencies": [
+                {{
+                    "name": "Competency Name",
+                    "rating": 0-10,
+                    "observations": [
+                        "Specific example or observation from the transcript",
+                        "Another example or observation"
+                    ],
+                    "areas_for_improvement": [
+                        "Suggestion for improvement",
+                        "Another suggestion"
+                    ]
+                }},
+                // ... repeat for all competencies
+            ],
+            "overall_assessment": "A brief overall assessment of the student's competency development"
+        }}
+
+        Ensure that you provide a rating between 0 and 10 for each competency, with 0 being the lowest and 10 being the highest level of competency demonstrated. Include at least two specific observations and two areas for improvement for each competency.
         """
         
         data = {
@@ -393,7 +487,7 @@ def main():
 
     
     audio_file = input(f"{Fore.YELLOW}Enter the name of the audio file: {Style.RESET_ALL}")
-    competency_file = input(f"{Fore.YELLOW}Enter the name of the competencies file: {Style.RESET_ALL}")
+    competency_file = input(f"{Fore.YELLOW}Enter the name of the competencies file (TXT or RTF): {Style.RESET_ALL}")
 
     if not os.path.exists(audio_file):
         print_colored(f"Error: The audio file {audio_file} does not exist.", Fore.RED)
@@ -443,14 +537,19 @@ def main():
     print_colored("Generating combined report...", Fore.CYAN)
     combined_report = generate_combined_report(narrative_reports, competency_data)
 
-    print_colored("\nWriting output to results/combined_report.html...", Fore.CYAN)
+    print_colored("\nWriting output to results folder...", Fore.CYAN)
     try:
         # Create the results directory if it doesn't exist
         os.makedirs('results', exist_ok=True)
         
-        with open('results/combined_report.html', 'w', encoding='utf-8') as report_file:
+        # Generate filename with audio file name and timestamp
+        base_filename = os.path.splitext(os.path.basename(audio_file))[0]
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"results/combined_report_{base_filename}_{timestamp}.html"
+        
+        with open(output_filename, 'w', encoding='utf-8') as report_file:
             report_file.write(combined_report)
-        print_colored("Combined report successfully written to results/combined_report.html", Fore.GREEN)
+        print_colored(f"Combined report successfully written to {output_filename}", Fore.GREEN)
 
         print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
         
