@@ -17,6 +17,7 @@ from cleanup import cleanup_temp_files
 import threading
 from striprtf.striprtf import rtf_to_text
 from datetime import datetime
+import webbrowser
 
 # Initialize colorama
 init(autoreset=True)
@@ -358,7 +359,7 @@ def extract_competency_data(transcript, competency_definitions):
         print_colored(f"Exception details: {str(e)}", Fore.RED)
         return None
 
-def generate_combined_report(narrative_reports, competency_data):
+def generate_combined_report(narrative_reports, competency_data, extraction_mode):
     # First, let's download Plotly.js
     plotly_js_url = "https://cdn.plot.ly/plotly-latest.min.js"
     plotly_js_content = requests.get(plotly_js_url).text
@@ -388,37 +389,43 @@ def generate_combined_report(narrative_reports, competency_data):
     """
 
     # Handle both single and multiple speaker scenarios
-    speakers = list(narrative_reports.keys())
+    speakers = list(set(narrative_reports.keys()) | set(competency_data.keys()))
     for speaker in speakers:
-        narrative = narrative_reports[speaker]
-        data = competency_data[speaker]
-
         combined_html += f"""
         <div class="speaker-section">
             <h2>{speaker}</h2>
-            <div>{narrative}</div>
+        """
+        
+        if extraction_mode in ['insights', 'both'] and speaker in narrative_reports:
+            combined_html += f"""
+            <div>{narrative_reports[speaker]}</div>
+            """
+        
+        if extraction_mode in ['data', 'both'] and speaker in competency_data:
+            data = competency_data[speaker]
+            combined_html += f"""
             <div id="radar-chart-{speaker}" class="radar-chart"></div>
             <div class="competency-data">
                 <h3>Quantitative Competency Data</h3>
-        """
-        
-        for competency in data['competencies']:
-            combined_html += f"""
-                <div class="competency-item">
-                    <h4>{competency['name']}</h4>
-                    <p class="rating">Rating: {competency['rating']}/10</p>
-                    <p>Observations:</p>
-                    <ul class="observations">
-                        {"".join(f"<li>{obs}</li>" for obs in competency['observations'])}
-                    </ul>
-                    <p>Areas for Improvement:</p>
-                    <ul class="areas-for-improvement">
-                        {"".join(f"<li>{area}</li>" for area in competency['areas_for_improvement'])}
-                    </ul>
-                </div>
             """
-        
-        combined_html += f"""
+            
+            for competency in data['competencies']:
+                combined_html += f"""
+                    <div class="competency-item">
+                        <h4>{competency['name']}</h4>
+                        <p class="rating">Rating: {competency['rating']}/10</p>
+                        <p>Observations:</p>
+                        <ul class="observations">
+                            {"".join(f"<li>{obs}</li>" for obs in competency['observations'])}
+                        </ul>
+                        <p>Areas for Improvement:</p>
+                        <ul class="areas-for-improvement">
+                            {"".join(f"<li>{area}</li>" for area in competency['areas_for_improvement'])}
+                        </ul>
+                    </div>
+                """
+            
+            combined_html += f"""
                 <h3>Overall Assessment</h3>
                 <p>{data['overall_assessment']}</p>
             </div>
@@ -446,6 +453,9 @@ def generate_combined_report(narrative_reports, competency_data):
                     }}
                 }})();
             </script>
+            """
+        
+        combined_html += """
         </div>
         """
 
@@ -459,6 +469,13 @@ def generate_combined_report(narrative_reports, competency_data):
 
     return combined_html
 
+def open_report_in_browser(file_path):
+    try:
+        webbrowser.open('file://' + os.path.realpath(file_path))
+        print_colored(f"Opened report in default browser: {file_path}", Fore.GREEN)
+    except Exception as e:
+        print_colored(f"Error opening report in browser: {e}", Fore.RED)
+
 def main():
     display_intro()
     
@@ -471,6 +488,13 @@ def main():
     
     # Ask user if they want to perform diarization
     perform_diarization = input(f"{Fore.YELLOW}Do you want to perform diarization? (yes/no): {Style.RESET_ALL}").lower() == 'yes'
+
+    # Ask user for extraction mode
+    while True:
+        extraction_mode = input(f"{Fore.YELLOW}Choose extraction mode (insights/data/both): {Style.RESET_ALL}").lower()
+        if extraction_mode in ['insights', 'data', 'both']:
+            break
+        print_colored("Invalid input. Please enter 'insights', 'data', or 'both'.", Fore.RED)
 
     if not os.path.exists(audio_file):
         print_colored(f"Error: The audio file {audio_file} does not exist.", Fore.RED)
@@ -514,21 +538,25 @@ def main():
     if len(speaker_transcripts) == 1 and "Speaker 1" in speaker_transcripts:
         speaker = "Single Speaker"
         transcript = speaker_transcripts["Speaker 1"]
-        print_colored(f"Extracting competency insights for {speaker}...", Fore.CYAN)
-        narrative_reports[speaker] = extract_competency_insights(transcript, competency_definitions)
-        
-        print_colored(f"Extracting competency data for {speaker}...", Fore.CYAN)
-        competency_data[speaker] = extract_competency_data(transcript, competency_definitions)
-    else:
-        for speaker, transcript in speaker_transcripts.items():
+        if extraction_mode in ['insights', 'both']:
             print_colored(f"Extracting competency insights for {speaker}...", Fore.CYAN)
             narrative_reports[speaker] = extract_competency_insights(transcript, competency_definitions)
-            
+        
+        if extraction_mode in ['data', 'both']:
             print_colored(f"Extracting competency data for {speaker}...", Fore.CYAN)
             competency_data[speaker] = extract_competency_data(transcript, competency_definitions)
+    else:
+        for speaker, transcript in speaker_transcripts.items():
+            if extraction_mode in ['insights', 'both']:
+                print_colored(f"Extracting competency insights for {speaker}...", Fore.CYAN)
+                narrative_reports[speaker] = extract_competency_insights(transcript, competency_definitions)
+            
+            if extraction_mode in ['data', 'both']:
+                print_colored(f"Extracting competency data for {speaker}...", Fore.CYAN)
+                competency_data[speaker] = extract_competency_data(transcript, competency_definitions)
 
     print_colored("Generating combined report...", Fore.CYAN)
-    combined_report = generate_combined_report(narrative_reports, competency_data)
+    combined_report = generate_combined_report(narrative_reports, competency_data, extraction_mode)
 
     print_colored("\nWriting output to results folder...", Fore.CYAN)
     try:
@@ -543,18 +571,16 @@ def main():
         with open(output_filename, 'w', encoding='utf-8') as report_file:
             report_file.write(combined_report)
         print_colored(f"Combined report successfully written to {output_filename}", Fore.GREEN)
-        print_colored(f"To view the report with radar charts, please open the HTML file in a web browser.", Fore.YELLOW)
 
-        print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
-        
-        # Stop background music and play completion sound
-        stop_background_music()
-        playsound('sound.mp3')
-        print_colored("Played completion sound", Fore.GREEN)
+        # Open the report in the default browser
+        open_report_in_browser(output_filename)
 
         # Clean up temporary files
         cleanup_temp_files()
         print_colored("Temporary files cleaned up", Fore.GREEN)
+
+        print_colored(f"{'[COMPLETE]':=^40}", Fore.GREEN)
+        
     except Exception as e:
         print_colored(f"Error writing output: {e}", Fore.RED)
         stop_background_music()
