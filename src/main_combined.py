@@ -254,6 +254,68 @@ def extract_competency_insights(transcript, competency_definitions):
             ]
         }
 
+        print_colored("Extracting competency insights...", Fore.CYAN)
+        response = requests.post(OPENROUTER_URL, headers=headers, json=data)
+        response.raise_for_status()
+        response_json = response.json()
+
+        print_colored("Competency insights extracted successfully.", Fore.GREEN)
+        return response_json['choices'][0]['message']['content']
+    except requests.RequestException as e:
+        print_colored(f"Error in API request: {e}", Fore.RED)
+        return None
+    except Exception as e:
+        print_colored(f"Error in competency insight extraction: {e}", Fore.RED)
+        return None
+
+def extract_competency_data(transcript, competency_definitions):
+    try:
+        headers = {
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "HTTP-Referer": SITE_URL,
+            "X-Title": SITE_NAME,
+            "Content-Type": "application/json"
+        }
+        
+        prompt = f"""
+        Analyze the following transcript and extract quantitative data about student competency development based on the provided competency definitions. Generate a JSON object that includes ratings and observations for EACH of the competencies in the competency definitions text. Focus on providing numerical ratings and specific examples from the transcript that demonstrate competency-related behaviors or knowledge.
+
+        Competency Definitions:
+        {competency_definitions}
+
+        Transcript:
+        {transcript}
+
+        Please provide a structured JSON object with the following format:
+        {{
+            "competencies": [
+                {{
+                    "name": "Competency Name",
+                    "rating": 0-10,
+                    "observations": [
+                        "Specific example or observation from the transcript",
+                        "Another example or observation"
+                    ],
+                    "areas_for_improvement": [
+                        "Suggestion for improvement",
+                        "Another suggestion"
+                    ]
+                }},
+                // ... repeat for all competencies
+            ],
+            "overall_assessment": "A brief overall assessment of the student's competency development"
+        }}
+
+        Ensure that you provide a rating between 0 and 10 for each competency, with 0 being the lowest and 10 being the highest level of competency demonstrated. Include at least two specific observations and two areas for improvement for each competency.
+        """
+        
+        data = {
+            "model": OPENROUTER_MODEL,
+            "messages": [
+                {"role": "user", "content": prompt}
+            ]
+        }
+
         print_colored("Extracting competency data...", Fore.CYAN)
         response = requests.post(OPENROUTER_URL, headers=headers, json=data)
         response.raise_for_status()
@@ -296,28 +358,6 @@ def extract_competency_insights(transcript, competency_definitions):
         print_colored(f"Exception details: {str(e)}", Fore.RED)
         return None
 
-def create_radar_chart(competency_data, speaker):
-    categories = [comp['name'] for comp in competency_data['competencies']]
-    values = [comp['rating'] for comp in competency_data['competencies']]
-
-    figure = go.Figure(data=go.Scatterpolar(
-        r=values,
-        theta=categories,
-        fill='toself'
-    ))
-
-    figure.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            )),
-        showlegend=False,
-        title=f"Competency Radar Chart for {speaker}"
-    )
-
-    return figure
-
 def generate_combined_report(narrative_reports, competency_data):
     # First, let's download Plotly.js
     plotly_js_url = "https://cdn.plot.ly/plotly-latest.min.js"
@@ -333,9 +373,13 @@ def generate_combined_report(narrative_reports, competency_data):
         <script>{plotly_js_content}</script>
         <style>
             body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; }}
-            h1, h2 {{ color: #2c3e50; }}
+            h1, h2, h3 {{ color: #2c3e50; }}
             .speaker-section {{ border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 5px; }}
             .radar-chart {{ width: 100%; height: 500px; }}
+            .competency-data {{ margin-top: 20px; }}
+            .competency-item {{ margin-bottom: 15px; }}
+            .rating {{ font-weight: bold; }}
+            .observations, .areas-for-improvement {{ margin-left: 20px; }}
         </style>
     </head>
     <body>
@@ -343,17 +387,46 @@ def generate_combined_report(narrative_reports, competency_data):
         <p><strong>Note:</strong> If the radar charts are not visible, please ensure you're opening this file with a web browser and that JavaScript is enabled.</p>
     """
 
-    for speaker, narrative in narrative_reports.items():
+    # Handle both single and multiple speaker scenarios
+    speakers = list(narrative_reports.keys())
+    for speaker in speakers:
+        narrative = narrative_reports[speaker]
+        data = competency_data[speaker]
+
         combined_html += f"""
         <div class="speaker-section">
             <h2>{speaker}</h2>
             <div>{narrative}</div>
             <div id="radar-chart-{speaker}" class="radar-chart"></div>
+            <div class="competency-data">
+                <h3>Quantitative Competency Data</h3>
+        """
+        
+        for competency in data['competencies']:
+            combined_html += f"""
+                <div class="competency-item">
+                    <h4>{competency['name']}</h4>
+                    <p class="rating">Rating: {competency['rating']}/10</p>
+                    <p>Observations:</p>
+                    <ul class="observations">
+                        {"".join(f"<li>{obs}</li>" for obs in competency['observations'])}
+                    </ul>
+                    <p>Areas for Improvement:</p>
+                    <ul class="areas-for-improvement">
+                        {"".join(f"<li>{area}</li>" for area in competency['areas_for_improvement'])}
+                    </ul>
+                </div>
+            """
+        
+        combined_html += f"""
+                <h3>Overall Assessment</h3>
+                <p>{data['overall_assessment']}</p>
+            </div>
             <script>
                 (function() {{
                     try {{
                         console.log('Attempting to create chart for {speaker}');
-                        var data = {json.dumps(competency_data[speaker])};
+                        var data = {json.dumps(data)};
                         Plotly.newPlot('radar-chart-{speaker}', [{{
                             type: 'scatterpolar',
                             r: data.competencies.map(comp => comp.rating),
@@ -436,12 +509,23 @@ def main():
 
     narrative_reports = {}
     competency_data = {}
-    for speaker, transcript in speaker_transcripts.items():
+
+    # Handle both single and multiple speaker scenarios
+    if len(speaker_transcripts) == 1 and "Speaker 1" in speaker_transcripts:
+        speaker = "Single Speaker"
+        transcript = speaker_transcripts["Speaker 1"]
         print_colored(f"Extracting competency insights for {speaker}...", Fore.CYAN)
         narrative_reports[speaker] = extract_competency_insights(transcript, competency_definitions)
         
         print_colored(f"Extracting competency data for {speaker}...", Fore.CYAN)
         competency_data[speaker] = extract_competency_data(transcript, competency_definitions)
+    else:
+        for speaker, transcript in speaker_transcripts.items():
+            print_colored(f"Extracting competency insights for {speaker}...", Fore.CYAN)
+            narrative_reports[speaker] = extract_competency_insights(transcript, competency_definitions)
+            
+            print_colored(f"Extracting competency data for {speaker}...", Fore.CYAN)
+            competency_data[speaker] = extract_competency_data(transcript, competency_definitions)
 
     print_colored("Generating combined report...", Fore.CYAN)
     combined_report = generate_combined_report(narrative_reports, competency_data)
