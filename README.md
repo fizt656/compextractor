@@ -62,9 +62,23 @@ As ZoneSight is an early prototype, please be aware that the user experience and
 
 4. Enter file names when prompted (audio, competencies, completion sound).
 
-5. The script will process the audio and generate a `combined_report.html` file.
+5. Choose the extraction mode (insights, data, or both) when prompted.
 
-6. Open the HTML file in a web browser to view the comprehensive report.
+6. The script will process the audio and generate a `combined_report.html` file.
+
+7. The report will automatically open in your default web browser.
+
+## Extraction Modes
+
+ZoneSight now offers three extraction modes to cater to different analysis needs:
+
+1. **Insights Mode**: This mode focuses on providing narrative insights about the competencies demonstrated in the audio. It generates a detailed HTML report with qualitative analysis of each competency, including evidence of competency development, areas for improvement, and specific examples from the transcript.
+
+2. **Data Mode**: This mode extracts quantitative data about the competencies. It produces a report with numerical ratings for each competency (on a scale of 0-10), along with specific observations and areas for improvement. The data is presented in both tabular form and as a radar chart for easy visualization.
+
+3. **Both Mode**: This comprehensive mode combines both insights and data, providing a full picture of the competency analysis. The report includes narrative insights, quantitative data, and visualizations, offering a holistic view of the competencies demonstrated in the audio.
+
+When running the script, you'll be prompted to choose one of these modes. The output report will be tailored to the selected mode, ensuring you get the most relevant information for your needs.
 
 ## Customization
 
@@ -133,11 +147,13 @@ To test:
    - Audio file: `test.wav`, `longer_test.wav`, or `multi-speaker-discussion.wav`
    - Competencies file: `test.txt`
    - Sound file: `sound.mp3`
+4. Choose the extraction mode (insights, data, or both)
 
 ## Additional Features
 
 - **Large File Handling**: Automatically splits large audio files into smaller chunks for processing.
 - **Multi-Speaker Support**: Identifies different speakers and provides speaker-specific analysis.
+- **Automatic Report Opening**: The generated report automatically opens in your default web browser for immediate viewing.
 
 ## Notes and Recommendations
 
@@ -185,4 +201,3 @@ Again, to use ZoneSight effectively for your specific needs, you'll need to crea
 2. **Custom Main Combined Script**: Create a custom version of the `main_combined.py` script (e.g., `custom_main_combined.py`) in the `src` directory. This script should be tailored to your specific analysis requirements, including customized prompts and any additional processing logic you need.
 
 If your organization already uses ZoneSight, you may be able to obtain these custom files from a colleague. Otherwise, you'll need to create them based on your organization's competency framework and analysis needs.
-

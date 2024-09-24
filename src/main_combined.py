@@ -51,7 +51,7 @@ def display_intro():
 
 def play_background_music():
     mixer.init()
-    mixer.music.load('In the Zone.mp3')
+    mixer.music.load('music.mp3')
     mixer.music.play(-1)  # -1 means loop indefinitely
 
 def stop_background_music():
@@ -508,8 +508,8 @@ def main():
     if not os.path.exists('coin.mp3'):
         print_colored(f"Error: The sound file coin.mp3 does not exist.", Fore.RED)
         return
-    if not os.path.exists('In the Zone.mp3'):
-        print_colored(f"Error: The sound file In the Zone.mp3 does not exist.", Fore.RED)
+    if not os.path.exists('music.mp3'):
+        print_colored(f"Error: The sound file music.mp3 does not exist.", Fore.RED)
         return
 
     wav_file = convert_to_wav(audio_file)
