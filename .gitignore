@@ -20,7 +20,6 @@ Thumbs.db
 
 # Output files
 results/
-competency_data.json
 
 # Temporary audio chunks
 *_chunk_*.wav

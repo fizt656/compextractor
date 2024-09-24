@@ -27,14 +27,24 @@ def print_colored(text, color=Fore.GREEN, style=Style.BRIGHT):
 
 def display_intro():
     intro = f"""
-    {Fore.CYAN}████████╗{Fore.MAGENTA}██████╗ {Fore.YELLOW}███████╗
-    {Fore.CYAN}╚══██╔══╝{Fore.MAGENTA}██╔══██╗{Fore.YELLOW}╚══███╔╝
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██████╔╝{Fore.YELLOW}  ███╔╝ 
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██╔═══╝ {Fore.YELLOW} ███╔╝  
-    {Fore.CYAN}   ██║   {Fore.MAGENTA}██║     {Fore.YELLOW}███████╗
-    {Fore.CYAN}   ╚═╝   {Fore.MAGENTA}╚═╝     {Fore.YELLOW}╚══════╝
-                             
-{Fore.YELLOW}Text Parsing Zone - Combined Narrative and Data Output{Style.RESET_ALL}
+    {Fore.CYAN} ______  {Fore.MAGENTA}_____  {Fore.YELLOW}_   _ _____ _____ _____ _____ _   _ _____ 
+    {Fore.CYAN}|___  / {Fore.MAGENTA}|  _  |{Fore.YELLOW}| \ | |  ___/  ___|_   _|  __ \ | | |_   _|
+    {Fore.CYAN}   / /  {Fore.MAGENTA}| | | |{Fore.YELLOW}|  \| | |__ \ `--.  | | | |  \/ |_| | | |  
+    {Fore.CYAN}  / /   {Fore.MAGENTA}| | | |{Fore.YELLOW}| . ` |  __| `--. \ | | | | __| __  | | |  
+    {Fore.CYAN}./ /___{Fore.MAGENTA}\ \_/ /{Fore.YELLOW}| |\  | |___/\__/ /_| |_| |_\ \ | | | | |  
+    {Fore.CYAN}\_____/{Fore.MAGENTA} \___/ {Fore.YELLOW}\_| \_/\____/\____/ \___/ \____/_| |_| \_/  
+                                                          
+         {Fore.CYAN}*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *    
+       {Fore.CYAN}*    _    _    _    _    _    _    _    _    _    _  * 
+     {Fore.CYAN}*  |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_|   *
+    {Fore.CYAN}*                                                           *
+     {Fore.CYAN}*     C O M P E T E N C Y           E X T R A C T O R     *
+    {Fore.CYAN}*                                                           *
+     {Fore.CYAN}*  |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_| |_|   *
+       {Fore.CYAN}*    -    -    -    -    -    -    -    -    -    -  * 
+         {Fore.CYAN}*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *    
+
+    {Fore.YELLOW}ZoneSight - Competency Extraction and Analysis Tool{Style.RESET_ALL}
     """
     print(intro)
 

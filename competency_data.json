@@ -1,0 +1,985 @@
+{
+  "SPEAKER_04": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 7,
+        "observations": [
+          "The speaker shows openness to different career paths beyond the typical blue-collar jobs in their hometown",
+          "They emphasize the importance of being open to unexpected opportunities"
+        ],
+        "areas_for_improvement": [
+          "Further develop the ability to see challenges as opportunities for growth",
+          "Practice reframing setbacks as learning experiences"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 8,
+        "observations": [
+          "The speaker demonstrates flexibility in considering career options beyond their hometown's norm",
+          "They emphasize the importance of being open to opportunities that one might not have initially considered"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for quickly adjusting to new situations or unexpected changes",
+          "Practice embracing change more readily in various aspects of life"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 9,
+        "observations": [
+          "The speaker stresses the importance of recognizing opportunities when they arise",
+          "They advise 'honing your intuition to recognize those opportunities when they come'"
+        ],
+        "areas_for_improvement": [
+          "Develop a systematic approach to evaluating potential opportunities",
+          "Practice identifying less obvious opportunities in various situations"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 6,
+        "observations": [
+          "The speaker shows an understanding of the importance of keeping an open mind",
+          "They implicitly suggest a willingness to learn about new opportunities"
+        ],
+        "areas_for_improvement": [
+          "Actively seek out new learning experiences and knowledge in various fields",
+          "Develop a more structured approach to personal and professional development"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 5,
+        "observations": [
+          "The speaker mentions 'this is my one opportunity', suggesting a determination to pursue a specific goal",
+          "They imply a willingness to consider less glamorous but more realistic paths"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for maintaining motivation during challenging times",
+          "Practice setting and working towards long-term goals despite obstacles"
+        ]
+      }
+    ],
+    "overall_assessment": "The student demonstrates a good understanding of adaptability and opportunity recognition, with a growing mindset towards career development. They show potential in continuous learning and persistence, although these areas could be further developed. The transcript provides limited information on other competencies, making a comprehensive assessment challenging. To improve overall competency development, the student could focus on actively seeking diverse learning experiences, developing systematic approaches to opportunity evaluation, and strengthening their persistence in pursuing long-term goals."
+  },
+  "SPEAKER_00": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 8,
+        "observations": [
+          "The speaker demonstrates a strong belief in their ability to shape their own path, saying 'It has to be on my terms.'",
+          "They show a commitment to personal growth and development by making decisions aligned with their life goals."
+        ],
+        "areas_for_improvement": [
+          "Consider being more open to opportunities that may initially seem limiting but could lead to unexpected growth.",
+          "Reflect on how to balance personal goals with collaborative growth opportunities."
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 6,
+        "observations": [
+          "The speaker shows some adaptability by being 'pretty workable' and easy to get along with in general.",
+          "They demonstrate flexibility in most areas except for their core life goal."
+        ],
+        "areas_for_improvement": [
+          "Work on being more open to adapting core goals as circumstances and opportunities change.",
+          "Practice finding ways to align seemingly conflicting opportunities with personal goals."
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 9,
+        "observations": [
+          "The speaker shows high confidence in their ability to achieve their goals, stating 'I will not accept no for an answer.'",
+          "They demonstrate strong self-belief in making decisions aligned with their life goals."
+        ],
+        "areas_for_improvement": [
+          "Reflect on how to maintain self-efficacy while also being open to feedback and alternative perspectives.",
+          "Consider how to balance strong self-belief with collaborative decision-making in professional settings."
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 9,
+        "observations": [
+          "The speaker demonstrates strong persistence in pursuing their life goal, refusing to be 'caged'.",
+          "They show a willingness to turn down opportunities that don't align with their goals, indicating long-term persistence."
+        ],
+        "areas_for_improvement": [
+          "Explore ways to maintain persistence while also being open to pivoting when necessary.",
+          "Consider how to balance personal persistence with team or organizational goals in professional settings."
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 7,
+        "observations": [
+          "The speaker shows ability to recognize opportunities that align with their goals.",
+          "They demonstrate capacity to assess potential opportunities against their life objectives."
+        ],
+        "areas_for_improvement": [
+          "Work on recognizing less obvious opportunities that might indirectly contribute to personal goals.",
+          "Develop skills in identifying opportunities that balance personal goals with broader professional or societal benefits."
+        ]
+      },
+      {
+        "name": "Sense of Belonging",
+        "rating": 5,
+        "observations": [
+          "The speaker expresses discomfort with traditional professional settings, likening it to being 'caged'.",
+          "They show a strong desire for independence and autonomy in their career path."
+        ],
+        "areas_for_improvement": [
+          "Explore ways to create a sense of belonging while maintaining desired independence.",
+          "Consider how to build connections and comfort in professional settings without feeling constrained."
+        ]
+      },
+      {
+        "name": "STEAM Interest",
+        "rating": 3,
+        "observations": [
+          "The transcript doesn't provide clear evidence of STEAM interest.",
+          "The speaker's focus on personal autonomy might indicate an interest in entrepreneurial or creative fields."
+        ],
+        "areas_for_improvement": [
+          "Explore how STEAM fields might align with personal goals for autonomy and innovation.",
+          "Consider how STEAM skills could contribute to achieving personal and professional objectives."
+        ]
+      },
+      {
+        "name": "Creativity",
+        "rating": 6,
+        "observations": [
+          "The speaker shows creativity in envisioning an unconventional career path.",
+          "They demonstrate innovative thinking in approaching life decisions."
+        ],
+        "areas_for_improvement": [
+          "Explore how to apply creative thinking to a wider range of personal and professional challenges.",
+          "Consider how creativity can be used to find unique solutions that balance personal goals with external requirements."
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 7,
+        "observations": [
+          "The speaker articulates their thoughts and decisions clearly in the transcript.",
+          "They demonstrate the ability to express personal goals and boundaries effectively."
+        ],
+        "areas_for_improvement": [
+          "Work on communicating personal goals in a way that engages and inspires others.",
+          "Develop skills in articulating the value of personal choices to diverse audiences."
+        ]
+      },
+      {
+        "name": "Teamwork",
+        "rating": 5,
+        "observations": [
+          "The speaker describes themselves as 'pretty workable' and easy to get along with.",
+          "They show a willingness to work with others in areas not conflicting with core personal goals."
+        ],
+        "areas_for_improvement": [
+          "Explore ways to maintain personal autonomy while effectively contributing to team goals.",
+          "Develop skills in finding synergies between personal objectives and team or organizational goals."
+        ]
+      },
+      {
+        "name": "Problem Solving",
+        "rating": 7,
+        "observations": [
+          "The speaker demonstrates problem-solving skills in navigating career decisions.",
+          "They show ability to evaluate opportunities against personal goals and make decisions accordingly."
+        ],
+        "areas_for_improvement": [
+          "Work on developing more structured problem-solving approaches for complex life and career decisions.",
+          "Practice considering multiple perspectives and potential outcomes when solving problems."
+        ]
+      },
+      {
+        "name": "STEAM Agency",
+        "rating": 4,
+        "observations": [
+          "The transcript doesn't provide clear evidence of STEAM agency.",
+          "The speaker's focus on personal decision-making might indicate some level of agency in career choices."
+        ],
+        "areas_for_improvement": [
+          "Explore how STEAM skills and knowledge can contribute to achieving personal and professional autonomy.",
+          "Consider how STEAM agency can enhance decision-making in various life and career contexts."
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 6,
+        "observations": [
+          "The speaker shows a commitment to personal growth through their career choices.",
+          "They demonstrate openness to new experiences that align with their goals."
+        ],
+        "areas_for_improvement": [
+          "Develop a more structured approach to continuous learning in various areas of life and career.",
+          "Explore learning opportunities outside of comfort zones to broaden perspectives and skills."
+        ]
+      },
+      {
+        "name": "Social Capital",
+        "rating": 5,
+        "observations": [
+          "The speaker mentions being easy to get along with, which may contribute to building social capital.",
+          "Their focus on personal goals might limit some opportunities for building diverse social networks."
+        ],
+        "areas_for_improvement": [
+          "Explore ways to build and leverage social networks while maintaining personal autonomy.",
+          "Develop strategies for creating mutually beneficial relationships in professional settings."
+        ]
+      }
+    ],
+    "overall_assessment": "The student demonstrates strong self-efficacy, persistence, and a growth mindset in pursuing personal goals. They show high adaptability and problem-solving skills within the context of their chosen path. However, there's room for improvement in balancing personal objectives with teamwork, STEAM interests, and broader professional engagement. Developing these areas could enhance their overall competency profile and open up additional opportunities for growth and success."
+  },
+  "SPEAKER_06": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 8,
+        "observations": [
+          "The speaker emphasizes the importance of trying different things to find one's passion",
+          "They discuss the idea of an 'internal GPS' guiding people towards their goals, suggesting a belief in personal growth and development"
+        ],
+        "areas_for_improvement": [
+          "Could further emphasize the role of effort and intentionality in personal growth",
+          "Might benefit from discussing specific strategies for developing skills and abilities"
+        ]
+      },
+      {
+        "name": "STEAM Interest",
+        "rating": 3,
+        "observations": [
+          "The transcript mentions making movies and music as examples of passions",
+          "There is no direct mention of STEAM fields or related interests"
+        ],
+        "areas_for_improvement": [
+          "Could explore connections between creative pursuits and STEAM fields",
+          "Might benefit from discussing how technology intersects with their interests"
+        ]
+      },
+      {
+        "name": "Creativity",
+        "rating": 7,
+        "observations": [
+          "The speaker discusses creative pursuits like making movies and music",
+          "They emphasize the importance of finding unique ways to pursue one's passion"
+        ],
+        "areas_for_improvement": [
+          "Could provide more specific examples of creative problem-solving",
+          "Might benefit from discussing how creativity applies in various career paths"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 6,
+        "observations": [
+          "The speaker suggests trying various approaches to find one's passion",
+          "They acknowledge that there are 'a hundred ways' to achieve one's goals"
+        ],
+        "areas_for_improvement": [
+          "Could discuss specific experiences of adapting to new situations",
+          "Might benefit from exploring strategies for learning from experiences and modifying behavior"
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 7,
+        "observations": [
+          "The speaker articulates their ideas clearly and persuasively",
+          "They use relatable examples and metaphors to convey complex concepts"
+        ],
+        "areas_for_improvement": [
+          "Could provide more structured arguments to support their points",
+          "Might benefit from using more diverse communication techniques"
+        ]
+      },
+      {
+        "name": "Problem Solving",
+        "rating": 5,
+        "observations": [
+          "The speaker discusses the challenge of finding one's passion",
+          "They suggest a trial-and-error approach to discovering career paths"
+        ],
+        "areas_for_improvement": [
+          "Could provide more specific examples of problem-solving strategies",
+          "Might benefit from discussing goal-setting and progress evaluation techniques"
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 7,
+        "observations": [
+          "The speaker expresses confidence in the idea of following one's passion",
+          "They discuss the concept of an 'internal GPS' guiding career choices"
+        ],
+        "areas_for_improvement": [
+          "Could provide more personal examples of overcoming challenges",
+          "Might benefit from discussing specific skills and knowledge applied in pursuing goals"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 6,
+        "observations": [
+          "The speaker implies the need for persistence in trying different approaches",
+          "They discuss the long-term nature of pursuing one's passion"
+        ],
+        "areas_for_improvement": [
+          "Could provide specific examples of overcoming setbacks",
+          "Might benefit from discussing strategies for maintaining motivation"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 5,
+        "observations": [
+          "The speaker acknowledges the existence of multiple paths to achieving goals",
+          "They suggest the importance of exploring different opportunities"
+        ],
+        "areas_for_improvement": [
+          "Could provide more specific examples of recognizing and assessing opportunities",
+          "Might benefit from discussing how to evaluate potential growth areas"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 6,
+        "observations": [
+          "The speaker emphasizes the importance of trying different things",
+          "They imply an ongoing process of discovery and growth in pursuing one's passion"
+        ],
+        "areas_for_improvement": [
+          "Could discuss specific strategies for ongoing learning and skill development",
+          "Might benefit from exploring the role of formal education in continuous learning"
+        ]
+      }
+    ],
+    "overall_assessment": "The transcript demonstrates a strong emphasis on personal growth, creativity, and adaptability in pursuing one's passion. The speaker shows good communication skills and self-efficacy. However, there's limited discussion of STEAM-specific interests or skills. The overall approach encourages exploration and persistence in career development, but could benefit from more concrete examples and strategies for skill development and problem-solving."
+  },
+  "SPEAKER_05": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 7,
+        "observations": [
+          "The speaker emphasizes the importance of setting up success based on personal effort and drive.",
+          "There's an implication that success is determined by oneself rather than external factors."
+        ],
+        "areas_for_improvement": [
+          "Explicitly discuss the belief in ability to grow and improve",
+          "Provide examples of overcoming challenges through effort"
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 8,
+        "observations": [
+          "The speaker advocates for making success 'hinge upon yourself and no outside factors'",
+          "There's a strong emphasis on personal control over outcomes"
+        ],
+        "areas_for_improvement": [
+          "Provide specific examples of successfully performing tasks",
+          "Discuss strategies for building confidence in one's abilities"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 6,
+        "observations": [
+          "The speaker suggests adjusting one's approach to work based on personal rewards",
+          "There's an implication of flexibility in determining how hard to work"
+        ],
+        "areas_for_improvement": [
+          "Discuss specific examples of adapting to new conditions",
+          "Elaborate on learning from experiences to modify behavior"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 7,
+        "observations": [
+          "The emphasis on 'how hard you work and how hard you drive' implies persistence",
+          "The speaker suggests maintaining effort regardless of external factors"
+        ],
+        "areas_for_improvement": [
+          "Provide specific examples of overcoming obstacles",
+          "Discuss strategies for maintaining motivation during challenges"
+        ]
+      },
+      {
+        "name": "Sense of Belonging",
+        "rating": 3,
+        "observations": [
+          "The speaker mentions agreement among 'all of us', suggesting some sense of group cohesion",
+          "There's a focus on individual determination rather than group acceptance"
+        ],
+        "areas_for_improvement": [
+          "Discuss feelings of comfort and acceptance in professional settings",
+          "Elaborate on experiences of contributing to a group or community"
+        ]
+      },
+      {
+        "name": "STEAM Interest",
+        "rating": 1,
+        "observations": [
+          "No direct mention of STEAM fields or related interests",
+          "The general discussion of work and effort could apply to any field"
+        ],
+        "areas_for_improvement": [
+          "Incorporate examples or discussions related to STEAM fields",
+          "Express personal interest or engagement with STEAM subjects"
+        ]
+      },
+      {
+        "name": "Creativity",
+        "rating": 2,
+        "observations": [
+          "The approach to determining personal success shows some creative thinking",
+          "No direct examples of generating new ideas or innovative solutions"
+        ],
+        "areas_for_improvement": [
+          "Provide examples of innovative problem-solving",
+          "Discuss instances of generating unique ideas or approaches"
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 5,
+        "observations": [
+          "The speaker articulates ideas about personal success clearly",
+          "There's an attempt to convey a shared understanding with the audience"
+        ],
+        "areas_for_improvement": [
+          "Provide more structured and detailed explanations",
+          "Use specific examples to illustrate points more effectively"
+        ]
+      },
+      {
+        "name": "Teamwork",
+        "rating": 2,
+        "observations": [
+          "The speaker references 'all of us', suggesting some group context",
+          "The focus is primarily on individual effort rather than cooperative work"
+        ],
+        "areas_for_improvement": [
+          "Discuss experiences of working cooperatively with diverse peers",
+          "Provide examples of achieving shared goals in a team setting"
+        ]
+      },
+      {
+        "name": "Problem Solving",
+        "rating": 4,
+        "observations": [
+          "The speaker suggests a method for achieving success, implying problem-solving",
+          "There's a focus on setting up conditions for personal success"
+        ],
+        "areas_for_improvement": [
+          "Provide specific examples of identifying and articulating problems",
+          "Discuss experiences of executing plans and evaluating progress"
+        ]
+      },
+      {
+        "name": "STEAM Agency",
+        "rating": 1,
+        "observations": [
+          "No direct mention of STEAM fields or related decision-making",
+          "The discussion of personal effort could apply to any field"
+        ],
+        "areas_for_improvement": [
+          "Incorporate examples of engaging with STEAM fields",
+          "Discuss instances of using technology or process-oriented thinking"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 5,
+        "observations": [
+          "The speaker recognizes the opportunity to determine one's own success",
+          "There's an implication of assessing potential for personal growth"
+        ],
+        "areas_for_improvement": [
+          "Provide specific examples of identifying growth opportunities",
+          "Discuss experiences of assessing and acting on potential innovations"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 3,
+        "observations": [
+          "The emphasis on personal effort implies a willingness to develop",
+          "No direct mention of seeking new knowledge or skills"
+        ],
+        "areas_for_improvement": [
+          "Discuss specific commitments to ongoing learning",
+          "Provide examples of seeking out new knowledge or skills"
+        ]
+      },
+      {
+        "name": "Social Capital",
+        "rating": 2,
+        "observations": [
+          "The speaker references 'Rick', suggesting some social connection",
+          "The focus is primarily on individual effort rather than leveraging social networks"
+        ],
+        "areas_for_improvement": [
+          "Discuss experiences of gaining resources through social networks",
+          "Provide examples of accessing opportunities through relationships"
+        ]
+      }
+    ],
+    "overall_assessment": "The transcript provides limited information to fully assess all competencies. The speaker demonstrates a strong emphasis on personal responsibility and effort in achieving success, indicating good self-efficacy and a growth mindset. However, there's limited evidence for many other competencies, particularly those related to STEAM fields, teamwork, and social capital. The assessment would benefit from a more comprehensive transcript or additional examples of the speaker's experiences and behaviors."
+  },
+  "SPEAKER_02": {
+    "competencies": [
+      {
+        "name": "Sense of Belonging",
+        "rating": 7,
+        "observations": [
+          "The speaker found a niche in visual effects and robotic cameras where their electronics background was valuable",
+          "They were able to progress to DPing miniatures units quickly in this specialized area"
+        ],
+        "areas_for_improvement": [
+          "Explore more ways to connect with others in the broader film industry",
+          "Seek mentorship opportunities to further enhance sense of belonging"
+        ]
+      },
+      {
+        "name": "Growth Mindset",
+        "rating": 8,
+        "observations": [
+          "The speaker adapted their career path based on their existing skills to find success in the film industry",
+          "They encourage others to think creatively about their unique skills and how to apply them"
+        ],
+        "areas_for_improvement": [
+          "Continue to explore new areas of the film industry for growth opportunities",
+          "Develop strategies for continuous skill improvement in chosen niche"
+        ]
+      },
+      {
+        "name": "STEAM Interest",
+        "rating": 9,
+        "observations": [
+          "The speaker has a background in electronics which they applied to visual effects and robotic cameras",
+          "They successfully combined their technical skills with their interest in film"
+        ],
+        "areas_for_improvement": [
+          "Explore more advanced technologies in film production",
+          "Stay updated on the latest STEAM developments relevant to the film industry"
+        ]
+      },
+      {
+        "name": "Creativity",
+        "rating": 8,
+        "observations": [
+          "The speaker creatively found a niche that combined their technical skills with their film industry aspirations",
+          "They helped another person creatively apply their language skills to find a job in the news industry"
+        ],
+        "areas_for_improvement": [
+          "Explore more unconventional applications of skills in the film industry",
+          "Develop brainstorming techniques to generate innovative career paths for others"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 9,
+        "observations": [
+          "The speaker adapted their career path to leverage their electronics background in the film industry",
+          "They quickly adjusted to opportunities in visual effects and robotic cameras"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for adapting to rapid technological changes in the film industry",
+          "Explore ways to adapt skills to different roles within the industry"
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 7,
+        "observations": [
+          "The speaker effectively communicated their career journey and advice to others",
+          "They were able to clearly explain the value of unique skills in finding job opportunities"
+        ],
+        "areas_for_improvement": [
+          "Practice more concise storytelling to convey key points",
+          "Develop techniques for tailoring advice to different audience backgrounds"
+        ]
+      },
+      {
+        "name": "Teamwork",
+        "rating": 6,
+        "observations": [
+          "The speaker mentions working in miniatures units, implying collaboration with others",
+          "They show willingness to help others by providing career advice"
+        ],
+        "areas_for_improvement": [
+          "Provide more examples of successful teamwork experiences",
+          "Develop strategies for effective collaboration in diverse film industry teams"
+        ]
+      },
+      {
+        "name": "Problem Solving",
+        "rating": 8,
+        "observations": [
+          "The speaker solved the challenge of entering the film industry by finding a specialized niche",
+          "They helped another person solve their job search problem by identifying a unique opportunity"
+        ],
+        "areas_for_improvement": [
+          "Develop more structured problem-solving approaches for career challenges",
+          "Explore techniques for breaking down complex industry problems"
+        ]
+      },
+      {
+        "name": "STEAM Agency",
+        "rating": 8,
+        "observations": [
+          "The speaker confidently applied their electronics knowledge to visual effects and robotic cameras",
+          "They demonstrate informed decision-making in choosing a career path that leverages their technical skills"
+        ],
+        "areas_for_improvement": [
+          "Stay updated on emerging technologies in the film industry",
+          "Explore opportunities to mentor others in applying STEAM skills to film"
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 8,
+        "observations": [
+          "The speaker shows confidence in their ability to navigate and succeed in the film industry",
+          "They demonstrate belief in their capacity to provide valuable advice to others"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for maintaining self-efficacy during challenging projects",
+          "Seek feedback to further strengthen confidence in abilities"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 7,
+        "observations": [
+          "The speaker persisted in finding a way into the film industry despite the typical long climb",
+          "They encourage others to persist in finding their unique path to success"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for maintaining motivation during long-term career goals",
+          "Share more examples of overcoming setbacks in the industry"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 9,
+        "observations": [
+          "The speaker recognized the opportunity to apply their electronics skills in visual effects",
+          "They quickly identified a unique opportunity for another person based on their language skills"
+        ],
+        "areas_for_improvement": [
+          "Develop a systematic approach to identifying opportunities in the industry",
+          "Explore methods for anticipating future industry trends and opportunities"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 7,
+        "observations": [
+          "The speaker adapted to new technologies in visual effects and robotic cameras",
+          "They show interest in understanding others' backgrounds and skills for career advice"
+        ],
+        "areas_for_improvement": [
+          "Establish a more structured plan for ongoing skill development",
+          "Seek out formal learning opportunities in emerging film technologies"
+        ]
+      },
+      {
+        "name": "Social Capital",
+        "rating": 8,
+        "observations": [
+          "The speaker leverages their experience to provide valuable advice to others in the industry",
+          "They demonstrate the ability to connect people with opportunities based on their network"
+        ],
+        "areas_for_improvement": [
+          "Develop a more systematic approach to networking within the film industry",
+          "Explore opportunities to formalize mentorship relationships"
+        ]
+      }
+    ],
+    "overall_assessment": "The individual demonstrates strong competencies in opportunity recognition, adaptability, and STEAM interest. They have successfully leveraged their technical background to carve out a niche in the film industry and show a keen ability to identify unique opportunities for themselves and others. Their growth mindset and problem-solving skills are evident in how they approached their career path. While they show strength in many areas, there is room for improvement in structured continuous learning and more formalized approaches to networking and mentorship. Overall, they exhibit a high level of competency in navigating and succeeding in the film industry through creative application of their skills and knowledge."
+  },
+  "SPEAKER_03": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 8,
+        "observations": [
+          "The speaker demonstrates openness to change: 'I realized what I was good at early... it wasn't the thing that I came here to go to school for, but that was okay.'",
+          "They show adaptability and willingness to learn: 'I ultimately got where I wanted to go and I took this long, crazy, exciting path to get there.'"
+        ],
+        "areas_for_improvement": [
+          "Further develop the ability to articulate specific growth strategies",
+          "Practice setting and achieving incremental goals to reinforce the growth mindset"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 9,
+        "observations": [
+          "The speaker embraces change and unexpected paths: 'I took this long, crazy, exciting path to get there.'",
+          "They emphasize the importance of being open to new opportunities: 'you just have to be open to all of those things.'"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for faster adaptation to new situations",
+          "Practice anticipating potential changes and planning flexible responses"
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 7,
+        "observations": [
+          "The speaker shows confidence in their abilities: 'have faith in your ability'",
+          "They encourage making decisions based on self-assessment: 'turn down things when it's not right for you'"
+        ],
+        "areas_for_improvement": [
+          "Work on articulating specific skills and strengths more clearly",
+          "Develop techniques for maintaining self-efficacy during challenging periods"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 8,
+        "observations": [
+          "The speaker recognizes the value in unexpected opportunities: 'take the things that might be so you're not so sure'",
+          "They demonstrate the ability to identify personal strengths: 'I realized what I was good at early'"
+        ],
+        "areas_for_improvement": [
+          "Enhance ability to systematically evaluate potential opportunities",
+          "Develop skills in creating opportunities, not just recognizing them"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 7,
+        "observations": [
+          "The speaker values the learning process: 'I took this long, crazy, exciting path to get there.'",
+          "They show openness to new experiences: 'you just have to be open to all of those things.'"
+        ],
+        "areas_for_improvement": [
+          "Develop a more structured approach to continuous learning",
+          "Set specific learning goals and track progress over time"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 6,
+        "observations": [
+          "The speaker implies persistence through their journey: 'I ultimately got where I wanted to go'",
+          "They recognize the need to overcome setbacks: 'have to step back to go forward'"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for maintaining motivation during challenging periods",
+          "Practice setting and achieving long-term goals to build persistence"
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 5,
+        "observations": [
+          "The speaker is able to convey personal experiences and insights",
+          "They use relatable language to explain complex ideas about career paths"
+        ],
+        "areas_for_improvement": [
+          "Work on structuring thoughts more clearly for better communication",
+          "Practice using more specific examples to illustrate points"
+        ]
+      },
+      {
+        "name": "Sense of Belonging",
+        "rating": 4,
+        "observations": [
+          "The speaker implies finding their place: 'I realized what I was good at'",
+          "They suggest comfort with their chosen path: 'I ultimately got where I wanted to go'"
+        ],
+        "areas_for_improvement": [
+          "Develop strategies for building stronger connections in professional settings",
+          "Work on articulating feelings of belonging more explicitly"
+        ]
+      }
+    ],
+    "overall_assessment": "The student demonstrates strong adaptability and a growth mindset, with good opportunity recognition skills. They show potential in self-efficacy and continuous learning. Areas for improvement include more structured approaches to learning and goal-setting, as well as enhancing communication skills. The limited transcript makes it challenging to assess all competencies fully, but the student appears to be on a positive developmental trajectory."
+  },
+  "SPEAKER_01": {
+    "competencies": [
+      {
+        "name": "Growth Mindset",
+        "rating": 9,
+        "observations": [
+          "The speaker demonstrates a strong growth mindset by quickly adapting to being laid off and immediately launching a new project.",
+          "They view the layoff as an opportunity for new possibilities, stating '10,000 other doors open up'"
+        ],
+        "areas_for_improvement": [
+          "Could reflect more on lessons learned from the layoff experience",
+          "Might benefit from discussing long-term strategies for career resilience"
+        ]
+      },
+      {
+        "name": "Adaptability",
+        "rating": 10,
+        "observations": [
+          "Quickly launched a Kickstarter project within half an hour of being laid off",
+          "Shifted focus from working in games to exploring opportunities in VR"
+        ],
+        "areas_for_improvement": [
+          "Could provide more details on how they adapted their skills to the new VR field",
+          "Might benefit from discussing how they prepared for potential career changes"
+        ]
+      },
+      {
+        "name": "Persistence",
+        "rating": 8,
+        "observations": [
+          "Demonstrates persistence by immediately taking action after a setback",
+          "Shows determination to continue in the tech industry despite the layoff"
+        ],
+        "areas_for_improvement": [
+          "Could elaborate on long-term persistence strategies",
+          "Might benefit from discussing how they maintain motivation during challenging times"
+        ]
+      },
+      {
+        "name": "Opportunity Recognition",
+        "rating": 9,
+        "observations": [
+          "Quickly identified the potential in launching a Kickstarter project",
+          "Recognized the opportunity to transition into VR after the layoff"
+        ],
+        "areas_for_improvement": [
+          "Could provide more details on how they identified the VR opportunity",
+          "Might benefit from discussing how they evaluate different opportunities"
+        ]
+      },
+      {
+        "name": "Self-Efficacy",
+        "rating": 8,
+        "observations": [
+          "Demonstrates confidence in ability to pivot and launch a new project quickly",
+          "Shows belief in their ability to succeed in a new field (VR) after the layoff"
+        ],
+        "areas_for_improvement": [
+          "Could elaborate on specific skills or experiences that contribute to their self-efficacy",
+          "Might benefit from discussing how they build and maintain confidence during career transitions"
+        ]
+      },
+      {
+        "name": "STEAM Interest",
+        "rating": 7,
+        "observations": [
+          "Shows interest in technology fields, having worked in games and transitioning to VR",
+          "Demonstrates enthusiasm for exploring new tech areas after the layoff"
+        ],
+        "areas_for_improvement": [
+          "Could provide more details on their specific interests within STEAM fields",
+          "Might benefit from discussing how they stay updated on STEAM developments"
+        ]
+      },
+      {
+        "name": "Creativity",
+        "rating": 7,
+        "observations": [
+          "Shows creative problem-solving by quickly launching a Kickstarter after being laid off",
+          "Demonstrates ability to envision new opportunities in VR"
+        ],
+        "areas_for_improvement": [
+          "Could provide more examples of creative solutions in their work",
+          "Might benefit from discussing how they foster creativity in their projects"
+        ]
+      },
+      {
+        "name": "Communication",
+        "rating": 6,
+        "observations": [
+          "Effectively communicates their experience and attitude towards career setbacks",
+          "Uses relatable examples to convey lessons to students"
+        ],
+        "areas_for_improvement": [
+          "Could provide more structured and detailed explanations of their experiences",
+          "Might benefit from using more varied communication techniques to engage listeners"
+        ]
+      },
+      {
+        "name": "Continuous Learning",
+        "rating": 7,
+        "observations": [
+          "Shows willingness to learn and adapt to new fields like VR after working in games",
+          "Demonstrates openness to new experiences and challenges"
+        ],
+        "areas_for_improvement": [
+          "Could elaborate on specific learning strategies used during career transitions",
+          "Might benefit from discussing long-term learning goals and plans"
+        ]
+      },
+      {
+        "name": "STEAM Agency",
+        "rating": 8,
+        "observations": [
+          "Demonstrates confidence in using technology to achieve personal goals (launching Kickstarter)",
+          "Shows ability to transition between different technology fields (games to VR)"
+        ],
+        "areas_for_improvement": [
+          "Could provide more details on how they use specific technologies in their work",
+          "Might benefit from discussing how they stay informed about STEAM industry trends"
+        ]
+      },
+      {
+        "name": "Sense of Belonging",
+        "rating": 6,
+        "observations": [
+          "Appears comfortable discussing career experiences in the tech industry",
+          "Refers to working at a major tech company as a 'dream job', indicating a sense of belonging in the field"
+        ],
+        "areas_for_improvement": [
+          "Could discuss more about their feelings of belonging in different work environments",
+          "Might benefit from elaborating on how they build connections in new work settings"
+        ]
+      },
+      {
+        "name": "Teamwork",
+        "rating": 5,
+        "observations": [
+          "No direct evidence of teamwork in the given transcript",
+          "Launching a Kickstarter may involve some level of collaboration, but details are not provided"
+        ],
+        "areas_for_improvement": [
+          "Could provide examples of teamwork experiences in previous roles",
+          "Might benefit from discussing how they approach collaboration in project launches"
+        ]
+      },
+      {
+        "name": "Problem Solving",
+        "rating": 8,
+        "observations": [
+          "Quickly identified a solution (launching Kickstarter) to the problem of being laid off",
+          "Demonstrates ability to pivot and find new opportunities in the face of career challenges"
+        ],
+        "areas_for_improvement": [
+          "Could provide more details on their problem-solving process",
+          "Might benefit from discussing how they anticipate and prepare for potential challenges"
+        ]
+      },
+      {
+        "name": "Social Capital",
+        "rating": 6,
+        "observations": [
+          "Implies some level of social capital by being able to quickly launch a Kickstarter",
+          "Demonstrates ability to leverage experiences (like working at a major tech company) in new ventures"
+        ],
+        "areas_for_improvement": [
+          "Could elaborate on how they build and maintain professional networks",
+          "Might benefit from discussing how they leverage social connections in career transitions"
+        ]
+      }
+    ],
+    "overall_assessment": "The individual demonstrates strong competencies in growth mindset, adaptability, and opportunity recognition. They show resilience in the face of career setbacks and an ability to quickly pivot to new opportunities. There's room for improvement in providing more detailed examples and reflecting on long-term strategies for career development and learning. While strong in individual action, more information would be needed to fully assess teamwork and social capital competencies."
+  }
+}
